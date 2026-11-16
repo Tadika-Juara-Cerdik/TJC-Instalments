@@ -66,10 +66,10 @@ h3::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--
 label.f{display:flex;flex-direction:column;gap:4px;font-size:13px;color:var(--muted);font-weight:700;min-width:0}
 .fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
 .fields .wide{grid-column:1/-1}
-.g-disc{grid-template-columns:minmax(0,2fr) minmax(0,1fr) minmax(0,1fr) minmax(0,1.4fr) auto;align-items:end;margin-bottom:8px}
+.g-disc{grid-template-columns:minmax(0,1.6fr) minmax(0,.7fr) minmax(0,.8fr) minmax(0,1.6fr) minmax(0,1.2fr) auto;align-items:end;margin-bottom:8px}
 .g-3{grid-template-columns:repeat(3,minmax(0,1fr));margin-bottom:8px}
 .g-prog{grid-template-columns:minmax(0,3fr) minmax(0,1fr);margin-bottom:8px}
-.g-dp{grid-template-columns:minmax(0,3fr) minmax(0,1fr) auto;align-items:end;margin-bottom:8px}
+.g-dp{grid-template-columns:minmax(0,3fr) minmax(0,1fr) minmax(0,2fr) auto;align-items:end;margin-bottom:8px}
 .g-term{grid-template-columns:minmax(0,1.4fr) repeat(4,minmax(0,1fr));margin-bottom:10px}
 .g-progx{grid-template-columns:minmax(0,.8fr) minmax(0,3fr) minmax(0,1.3fr) auto;align-items:end;margin-bottom:8px}
 .cov{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:4px;margin-top:6px}
@@ -91,11 +91,12 @@ details summary::marker{color:var(--muted)}
 .fi-lbl{font-size:12px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
 .fi-ages{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px}
 .fi-parts{background:var(--soft);border-radius:12px;padding:10px 12px;display:grid;gap:6px}
-.fi-part{display:flex;gap:8px;align-items:center}.fi-part>input{flex:1;min-width:0}
+.fi-part{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.fi-part>input{flex:1;min-width:0}
 .lo{padding:6px 0;border-bottom:1px dashed var(--line)}.lo:last-of-type{border-bottom:0}
 .lo-parts{margin:6px 0 4px 28px;display:grid;gap:4px}
 .lo-p{display:flex;justify-content:space-between;gap:10px;align-items:center;font-size:14px}.lo-p span:first-child{display:flex;gap:8px;align-items:center}
 .lo-p select{width:auto;padding:3px 8px;font-size:13px}
+.lo-adj{margin:4px 0 2px 28px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:8px}@media (max-width:520px){.lo-adj{grid-template-columns:minmax(0,1fr)}}
 .rep-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-bottom:16px}
 @media (max-width:900px){.rep-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media (max-width:560px){.rep-grid{grid-template-columns:minmax(0,1fr)}}
 .rep{display:flex;flex-direction:column;gap:10px}.rep p{margin:0;flex:1}.rep .row{margin-top:auto}
@@ -137,11 +138,13 @@ tr.click{cursor:pointer}tr.click:hover td{background:var(--soft)}
 .ln .lbl{min-width:0}
 .ln .note{display:block;font-size:12px;color:var(--muted)}
 .ln.disc .amt{color:var(--ok)}.ln.dep .lbl{color:var(--blue);font-weight:700}.ln.struck .amt{text-decoration:line-through;color:var(--muted)}
+.ln.edited .amt,.ln.edited .lbl{color:var(--warn)}
 .ln.tot{border-top:2px dashed var(--line);margin-top:6px;padding-top:10px;font-weight:800;font-size:16px}
 .inst{border-top:1px solid var(--line);padding:12px 18px 16px;background:var(--soft)}
 .inst table td{padding:5px 6px;border:0}
 .inst input{padding:6px 9px}
 .muted{color:var(--muted)}.small{font-size:13px}
+.saving .flash{background:var(--sun);color:#1b2a3d}
 .flash{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--navy);color:var(--navy-ink);padding:10px 18px;border-radius:999px;font-weight:700;font-size:14px;z-index:20;max-width:calc(100% - 32px)}
 .note-box{background:var(--warn-soft);color:var(--warn);border-radius:12px;padding:10px 14px;font-size:13px;font-weight:600}
 .steps{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 18px}
@@ -192,7 +195,7 @@ const DEFAULT={
   items:[
     {id:'admin',name:'Administration Fee',freq:'once',programs:['mp','asp','aspe'],opt:'',prorate:false,disc:false,amt:{'Age 3':100,'Age 4':100,'Age 5':100,'Age 6':100}},
     {id:'books',name:'Books',freq:'once',programs:['mp','asp','aspe'],opt:'',prorate:false,disc:false,amt:{'Age 3':600,'Age 4':1050,'Age 5':1300,'Age 6':1480}},
-    {id:'ins',name:'Insurance & Uniforms',freq:'once',programs:['mp','asp','aspe'],opt:'',prorate:false,disc:false,amt:{'Age 3':230,'Age 4':230,'Age 5':230,'Age 6':230},parts:[{name:'School Uniform',amt:55,qty:2,unit:'set'},{name:'Sports Wear',amt:50,qty:1},{name:'Apron',amt:25,qty:1},{name:'Sew On Name Tag (4 pcs)',amt:15,qty:1},{name:'Insurance',amt:30,qty:1}]},
+    {id:'ins',name:'Insurance & Uniforms',freq:'once',programs:['mp','asp','aspe'],opt:'',prorate:false,disc:false,amt:{'Age 3':230,'Age 4':230,'Age 5':230,'Age 6':230},parts:[{name:'School Uniform',amt:55,qty:2,unit:'set',ex:0},{name:'Sports Wear',amt:50,qty:1,ex:1},{name:'Apron',amt:25,qty:1,ex:0},{name:'Sew On Name Tag (4 pcs)',amt:15,qty:1,ex:0},{name:'Insurance',amt:30,qty:1,ex:1,req:true}]},
     {id:'struct',name:'Structural Fee',freq:'term',programs:['mp','asp','aspe'],opt:'',prorate:false,disc:true,amt:{'Age 3':450,'Age 4':450,'Age 5':450,'Age 6':450}},
     {id:'curr',name:'Curriculum Fee',freq:'term',programs:['mp','asp','aspe'],opt:'',prorate:true,disc:true,amt:{'Age 3':2720,'Age 4':2780,'Age 5':2830,'Age 6':2830}},
     {id:'aspc',name:'ASP Core',freq:'term',programs:['asp'],opt:'',prorate:true,disc:true,amt:{'Age 3':2350,'Age 4':2600,'Age 5':2600,'Age 6':2600}},
@@ -200,7 +203,7 @@ const DEFAULT={
     {id:'hca',name:'Annual Holiday Care',freq:'term',programs:['mp','asp','aspe'],opt:'annual',prorate:false,disc:false,amt:{'Age 3':900,'Age 4':900,'Age 5':900,'Age 6':900}},
     {id:'hcw',name:'Weekly Holiday Care',freq:'week',programs:['mp','asp','aspe'],opt:'weekly',prorate:false,disc:false,amt:{'Age 3':480,'Age 4':480,'Age 5':480,'Age 6':480}}
   ],
-  discounts:[{label:'Sibling discount',pct:5},{label:'Non-staff discount',pct:10},{label:'1st child',pct:50},{label:'2nd child onwards',pct:65}],
+  discounts:[{label:'Sibling discount',pct:5,on:'curr'},{label:'Non-staff discount',pct:10},{label:'1st child',pct:50},{label:'2nd child onwards',pct:65}],
   late:{flat:15,pct:0.5,grace:7,cancel:14},
   remarks:{
     breakdown:'Fees follow the {year} Fee Structure. This breakdown is an estimate until confirmed by the school office.',
@@ -248,9 +251,15 @@ const fmtDT=s=>{if(!s)return '';const d=new Date(s);return d.getDate()+' '+MON[d
 const daysBetween=(a,b)=>Math.round((new Date(b)-new Date(a))/864e5);
 const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,6);
 const fmtU=u=>(u%1?String(u):String(u))+' month'+(u===1?'':'s');
-function mergeCfg(saved){const c=clone(DEFAULT);if(saved){for(const k in saved)c[k]=saved[k];c.school={...DEFAULT.school,...(saved.school||{})};c.late={...DEFAULT.late,...(saved.late||{})};c.remarks={...DEFAULT.remarks,...(saved.remarks||{})}}for(const it of c.items){if(!it.parts){const d=DEFAULT.items.find(x=>x.id===it.id);if(d&&d.parts)it.parts=clone(d.parts)}}normTerms(c);return c}
+function mergeCfg(saved){const c=clone(DEFAULT);if(saved){for(const k in saved)c[k]=saved[k];c.school={...DEFAULT.school,...(saved.school||{})};c.late={...DEFAULT.late,...(saved.late||{})};c.remarks={...DEFAULT.remarks,...(saved.remarks||{})}}for(const it of c.items){const d=DEFAULT.items.find(x=>x.id===it.id);
+    if(!it.parts&&d&&d.parts)it.parts=clone(d.parts);
+    if(it.parts&&d&&d.parts)it.parts.forEach(pt=>{const dp=d.parts.find(x=>x.name===pt.name);if(dp){if(pt.ex===undefined)pt.ex=dp.ex;if(pt.req===undefined)pt.req=dp.req}});
+    if(it.first===undefined)it.first=['admin','books','ins','struct'].includes(it.id);
+    if(it.dumcOn===undefined)it.dumcOn=it.id==='curr';}
+  for(const d of c.discounts){if(d.on===undefined&&/sibling/i.test(d.label||''))d.on='curr'}normTerms(c);return c}
 function normTerms(c){for(const t of c.terms){if(!t.start)t.start=(t.months||[1])[0];if(!t.end)t.end=(t.months||[1]).slice(-1)[0];t.months=range(t.start,Math.max(t.start,t.end))}for(const p of c.programs)if(!p.code)p.code=p.id.toUpperCase()}
-function flash(msg){const f=$('#flash');f.textContent=msg;f.hidden=false;clearTimeout(flash.t);flash.t=setTimeout(()=>f.hidden=true,2600)}
+function flash(msg,sticky){const f=$('#flash');f.textContent=msg;f.hidden=false;clearTimeout(flash.t);if(!sticky)flash.t=setTimeout(()=>f.hidden=true,2600)}
+function busy(on,label){document.querySelectorAll('[data-save],[data-cfgsave]').forEach(b=>{if(on){b.dataset.txt=b.textContent;b.textContent=label||'Saving…';b.disabled=true}else{b.disabled=false;if(b.dataset.txt)b.textContent=b.dataset.txt}});document.body.classList.toggle('saving',!!on)}
 
 /* ---------- fee engine ---------- */
 function progOf(cfg,id){return cfg.programs.find(p=>p.id===id)||cfg.programs[0]}
@@ -279,47 +288,62 @@ function compute(cfg,c){
       if(it.opt==='weekly'&&c.holiday!=='weekly')continue;
       if(it.freq==='once'&&!isFirst)continue;
       const base=+(it.amt||{})[c.age]||0;if(!base)continue;
-      let amt=base,note='';
+      let amt=base,note='',extra=null;
       if(it.freq==='week'){const wk=+((c.weeks||[])[ti])||0;if(!wk)continue;amt=base*wk;note=wk+' week'+(wk>1?'s':'')+' × '+rm(base)}
       else if(it.freq==='term'&&isFirst&&it.prorate&&frac<1){amt=base*frac;note=fmtU(units)+' of '+tm+' ('+how+') × '+rm(base)}
       else if(it.freq==='once')note='Annual fee, collected on enrolment';
-      amt=r2(amt);
+      amt=r2(amt);let label=it.name;
+      if(c.dumc&&it.dumcOn){const sem=+((it.sem||{})[c.age])||0;
+        if(sem){const f=(it.freq==='term'&&isFirst&&it.prorate&&frac<1)?frac:1;const semAmt=r2(sem*f);extra='Tuition fee '+rm(r2(amt-semAmt))+' paid by DUMC';amt=semAmt;label=it.name+' – semester fee';note=(note?note.replace(rm(base),rm(sem)):'')}
+        else extra='DUMC semester fee not set in Settings › Fee items';}
       const ex=(c.excluded||{})[it.id];
-      if(ex){lines.push({label:it.name,amt:0,orig:amt,note:ex,kind:'fee',struck:true});continue}
-      if(it.parts&&it.parts.length){const pq=(c.partsQty||{})[it.id]||{};let less=0;const gone=[];
-        it.parts.forEach((pt,k)=>{const q=+pt.qty||1,ch=pq[k]==null?q:Math.max(0,Math.min(q,+pq[k]));if(ch<q){less+=(q-ch)*(+pt.amt||0);gone.push((q>1?(q-ch)+' '+(pt.unit||'pc')+(q-ch>1?'s':'')+' ':'')+pt.name)}});
-        if(less){amt=r2(Math.max(0,amt-less));note=(note?note+' · ':'')+'Less '+gone.join(', ')+' ('+rm(less)+')'}}
-      lines.push({label:it.name,amt,note,kind:'fee',disc:!!it.disc});
+      if(ex){lines.push({label:it.name,amt:0,orig:amt,note:ex,kind:'fee',struck:true,item:it.id});continue}
+      let partsTxt='';
+      if(it.parts&&it.parts.length){let less=0;const inc=[],out=[];
+        it.parts.forEach((pt,k)=>{const q=+pt.qty||1,ch=partQty(c,it,k);const u=n=>n+' '+(pt.unit||'pc')+(n>1?'s':'');
+          if(ch>0)inc.push(pt.name+(q>1?' ×'+ch:''));if(ch<q){less+=(q-ch)*(+pt.amt||0);out.push((q>1&&ch>0?u(q-ch)+' ':'')+pt.name)}});
+        if(less)amt=r2(Math.max(0,amt-less));
+        partsTxt='Included: '+(inc.join(', ')||'none')+(out.length?' · Not needed: '+out.join(', ')+' (less '+rm(less)+')':'');}
+      const ov=(c.override||{})[it.id];
+      if(ov&&ov.amt!==''&&ov.amt!=null&&!isNaN(+ov.amt)&&isFirst){note=(ov.note?ov.note+' · ':'Adjusted · ')+'standard '+rm(amt);amt=r2(+ov.amt)}
+      lines.push({label,amt,note:[note,partsTxt,extra].filter(Boolean).join(' · '),kind:'fee',disc:!!it.disc,item:it.id,up:!!it.first});
     }
-    const base=lines.filter(l=>l.disc).reduce((s,l)=>s+l.amt,0);
     for(const d of (c.discounts||[])){
       if(d.scope==='first'&&!isFirst)continue;
+      const tgt=lines.filter(l=>!l.struck&&l.kind==='fee'&&(d.on?l.item===d.on:l.disc));const base=r2(tgt.reduce((s,l)=>s+l.amt,0));
       const v=+d.pct?r2(base*d.pct/100):r2(d.amt);
-      if(v)lines.push({label:(d.label||'Discount')+(+d.pct?' ('+d.pct+'%)':''),amt:-v,kind:'disc',note:+d.pct?'On '+rm(base)+' of discountable fees':''});
+      const onName=d.on?(tgt[0]?tgt[0].label:((cfg.items.find(x=>x.id===d.on)||{}).name||'')):'discountable fees';
+      if(v)lines.push({label:(d.label||'Discount')+(+d.pct?' ('+d.pct+'%)':''),amt:-v,kind:'disc',note:+d.pct?'On '+rm(base)+' '+onName:''});
     }
     const dep=+prog.deposit||0;
-    if(isFirst&&c.deposit==='collect'&&dep)lines.push({label:'Initial payment',amt:dep,kind:'dep',note:'Non-refundable. Offset against '+cfg.terms[last].name+' fees'});
-    if(ti===last&&c.deposit!=='none'&&dep)lines.push({label:'Less: initial payment offset',amt:-dep,kind:'dep',note:c.deposit==='paid'?'Initial payment received earlier':''});
-    const total=r2(lines.reduce((s,l)=>s+l.amt,0));
-    res.terms.push({ti,maxCfg:+t.maxInst||0,enrol:c.enrolDate||iso(y,1,1),name:t.name,range:MON[t.months[0]-1]+'–'+MON[t.months[tm-1]-1],tm,units,isFirst,prorated:isFirst&&frac<1,how,lines,total,startMonth:isFirst?em:t.invoice});
+    if(isFirst&&c.deposit==='collect'&&dep)lines.push({label:'Initial payment',amt:dep,kind:'dep',up:true,note:'Non-refundable. Collected with the 1st instalment and offset against '+cfg.terms[last].name+' fees'});
+    if(isFirst&&c.deposit==='paid'&&dep)lines.push({label:'Initial payment (already paid)',amt:0,orig:dep,kind:'dep',struck:true,note:'Received '+(c.depositPaidOn?fmtD(c.depositPaidOn):'earlier')+' · '+rm(dep)});
+    if(ti===last&&c.deposit!=='none'&&dep)lines.push({label:'Less: initial payment offset',amt:-dep,kind:'dep',note:c.deposit==='paid'?'Initial payment received '+(c.depositPaidOn?fmtD(c.depositPaidOn):'earlier'):''});
+    {const man=(c.manual||{})[ti]||{};for(const l of lines){const k=lineKey(l),v=man[k];if(!l.struck&&v!==undefined&&v!==''&&v!==null&&!isNaN(+v)&&r2(+v)!==l.amt){l.note=(l.note?l.note+' · ':'')+'Edited manually (calculated '+rm(l.amt)+')';l.amt=r2(+v);l.edited=true}}
+     ((c.extra||{})[ti]||[]).forEach((x,xi)=>{if(x&&(x.label||+x.amt))lines.push({label:x.label||'Other charge',amt:r2(+x.amt||0),kind:'fee',note:'Added manually'+(x.note?' · '+x.note:''),extra:true,xi,up:!!x.up})})}
+    const total=r2(lines.reduce((s,l)=>s+l.amt,0));const up=r2(lines.filter(l=>l.up&&!l.struck).reduce((s,l)=>s+l.amt,0));
+    res.terms.push({ti,up,maxCfg:+t.maxInst||0,enrol:c.enrolDate||iso(y,1,1),name:t.name,range:MON[t.months[0]-1]+'–'+MON[t.months[tm-1]-1],tm,units,isFirst,prorated:isFirst&&frac<1,how,lines,total,startMonth:isFirst?em:t.invoice});
     res.year+=total;
   }
   res.year=r2(res.year);
   return res;
 }
+function lineKey(l){return l.item||(l.kind+':'+l.label)}
+function partQty(c,it,k){const pt=it.parts[k],q=+pt.qty||1,ex=(c.student||'New')==='Existing';if(ex&&pt.req)return q;const pq=((c.partsQty||{})[it.id]||{})[k];const def=ex&&pt.ex!==undefined?+pt.ex:q;return Math.max(0,Math.min(q,pq==null?def:+pq))}
+function splitTerm(t,n){if(n<=1)return[r2(t.total)];const up=Math.min(t.up||0,t.total);const a=split(r2(t.total-up),n);a[0]=r2(a[0]+up);return a}
 const maxInst=t=>t.maxCfg?Math.max(1,Math.min(t.maxCfg,Math.ceil(t.units))):Math.max(1,Math.ceil(t.units)-1);
 function split(total,n){if(n<=1)return[r2(total)];const b=Math.floor(total/n);const a=Array(n-1).fill(b);a.push(r2(total-b*(n-1)));return a}
 function makeInst(cfg,t,n,prev){
   n=Math.max(1,Math.min(n,maxInst(t)));
   const dues=[...Array(n)].map((_,k)=>{if(prev&&prev.dues&&prev.dues[k]&&prev.dues.length===n)return prev.dues[k];const d=iso(cfg.year,t.startMonth+k,cfg.dueDay);return k===0&&t.isFirst&&t.enrol>d?t.enrol:d});
   const paid=[...Array(n)].map((_,k)=>!!(prev&&prev.paid&&prev.dues&&prev.dues.length===n&&prev.paid[k]));
-  return{n,total:t.total,dues,amounts:split(t.total,n),paid};
+  return{n,total:t.total,up:t.up||0,dues,amounts:splitTerm(t,n),paid};
 }
 function syncInst(cfg,plan,res){
   plan.inst=plan.inst||{};
   for(const t of res.terms){const cur=plan.inst[t.ti];
     if(!cur)plan.inst[t.ti]=makeInst(cfg,t,maxInst(t),null);
-    else if(cur.total!==t.total||cur.n>maxInst(t))plan.inst[t.ti]=makeInst(cfg,t,cur.n,cur)}
+    else if(cur.total!==t.total||(cur.up||0)!==(t.up||0)||cur.n>maxInst(t))plan.inst[t.ti]=makeInst(cfg,t,cur.n,cur)}
   for(const k of Object.keys(plan.inst))if(!res.terms.find(t=>String(t.ti)===String(k)))delete plan.inst[k];
 }
 function allInst(plan){
@@ -334,11 +358,11 @@ function instState(i,today){today=today||todayISO();if(i.paid)return['paid','Pai
 let repMonth=new Date().getMonth()+1,configs={},viewYear=(()=>{try{return +localStorage.getItem('tjcYear')||0}catch(e){return 0}})()||Math.max(2027,new Date().getFullYear());
 if(viewYear<Math.max(2026,new Date().getFullYear()-1))viewYear=new Date().getFullYear();
 let apiUrl=(()=>{try{return API_URL||localStorage.getItem('tjcApi')||''}catch(e){return API_URL}})(),pin=(()=>{try{return localStorage.getItem('tjcPin')||''}catch(e){return ''}})(),requests=[],loginErr='',lastBackup='',LIVE_FROM_SRV=0,
-  cfgReady=false,plansReady=false,maintDone=false,archiveCache=null,archYear=null,archOpen=null,backupsList=null,backupBusy=false,restoreArm=null,upState='',openRemark=null,cfg=clone(DEFAULT),plans=[],view='dash',draft=null,saved=null,cfgDraft=null,ready=false,storeOK=true,planFilter='current';
+  editTerms=new Set(),adjOpen=new Set(),cfgReady=false,plansReady=false,maintDone=false,archiveCache=null,archYear=null,archOpen=null,backupsList=null,backupBusy=false,restoreArm=null,upState='',openRemark=null,cfg=clone(DEFAULT),plans=[],view='dash',draft=null,saved=null,cfgDraft=null,ready=false,storeOK=true,planFilter='current';
 const blankPlan=()=>({id:'',year:viewYear,status:'Requested',requestDate:todayISO(),
   parent:{name:'',ic:'',relation:'Mother',phone:'',email:'',address:'',name2:'',phone2:''},
   child:{name:'',dob:'',siblings:'',newStudent:'New'},reason:'',preferred:'',
-  calc:{age:'Age 4',program:'mp',enrolDate:iso(cfg.year,1,1),startHalf:'auto',holiday:'none',weeks:[0,0,0],deposit:'collect',excluded:{},discounts:[]},
+  calc:{student:'New',age:'Age 4',program:'mp',enrolDate:iso(cfg.year,1,1),startHalf:'auto',holiday:'none',weeks:[0,0,0],deposit:'collect',excluded:{},discounts:[]},
   inst:{},principal:{name:'',date:''},parentSign:{name:'',date:''},notes:'',history:[]});
 
 async function api(action,body){
@@ -386,6 +410,11 @@ function yearsList(){const now=new Date().getFullYear();const ys=new Set([2027,n
 function renderYear(){const el=$('#year');if(el)el.innerHTML=yearsList().map(y=>`<option ${y===viewYear?'selected':''}>${y}</option>`).join('')}
 function setYear(y){viewYear=+y;try{localStorage.setItem('tjcYear',String(y))}catch(e){}applyYear();if(view==='edit')view='plans';go(view==='calc'||view==='settings'?view:view)}
 function copyBanner(){if(!cfg.copiedFrom)return '';return `<div class="note-box" style="margin:16px 0 0">${cfg.copiedFrom==='default'?'Fees for '+viewYear+' haven’t been saved yet, so the 2027 fee structure is shown.':'Fees for '+viewYear+' haven’t been saved yet, so the '+cfg.copiedFrom+' fees are shown.'} Check them in <b>Settings</b> and save to keep them for ${viewYear}.</div>`}
+function adminName(){try{return (localStorage.getItem('tjcAdmin')||'').trim()}catch(e){return window.__admin||''}}
+function manualSummary(prev,p){const out=[];const a=(prev&&prev.calc&&prev.calc.manual)||{},b=(p.calc&&p.calc.manual)||{};
+  const ks=new Set([...Object.keys(a),...Object.keys(b)]);for(const ti of ks){const x=a[ti]||{},y=b[ti]||{};for(const k of new Set([...Object.keys(x),...Object.keys(y)]))if(x[k]!==y[k]){const nm=(cfg.items.find(i=>i.id===k)||{}).name||k.replace(/^\w+:/,'');out.push((cfg.terms[ti]||{}).name+' '+nm+': '+(y[k]===undefined?'back to calculated':rm(y[k])))}}
+  const ea=JSON.stringify((prev&&prev.calc&&prev.calc.extra)||{}),eb=JSON.stringify((p.calc&&p.calc.extra)||{});if(ea!==eb)out.push('extra charges/credits changed');
+  return out.length?'Calculation edited manually ('+out.join('; ')+')':''}
 function historyNote(prev,p){
   if(!prev)return 'Request recorded'+(p.form?' · Parent form uploaded':'');
   const out=[];
@@ -394,6 +423,7 @@ function historyNote(prev,p){
   const pc=JSON.stringify(prev.calc),nc=JSON.stringify(p.calc);
   const strip=o=>JSON.stringify(Object.fromEntries(Object.entries(o||{}).map(([k,v])=>[k,{...v,paid:undefined}])));
   const paidCh=[];for(const ti of Object.keys(p.inst||{})){const a=(prev.inst||{})[ti]?.paid||[],b=p.inst[ti].paid||[];b.forEach((v,k)=>{if(!!v!==!!a[k])paidCh.push((v?'Paid: ':'Unmarked paid: ')+cfg.terms[ti].name+' #'+(k+1))})}
+  const ms=manualSummary(prev,p);if(ms)out.push(ms);
   if(pc!==nc)out.push('Fee breakdown changed (new total '+rm(compute(cfg,p.calc).year)+')');
   else if(strip(prev.inst)!==strip(p.inst))out.push('Instalment schedule changed');
   out.push(...paidCh);
@@ -401,20 +431,23 @@ function historyNote(prev,p){
   if(JSON.stringify(prev.parentSign)!==JSON.stringify(p.parentSign)&&p.parentSign.date)out.push('Parent signed '+fmtD(p.parentSign.date));
   return out.join(' · ')||'Details updated';
 }
-function discOK(p){const c=p.calc||{};return (c.discounts||[]).some(d=>+d.pct||+d.amt)||!!c.noDiscount}
+function discOK(p){const c=p.calc||{};return (c.discounts||[]).some(d=>+d.pct||+d.amt)||!!c.noDiscount||!!c.dumc}
 function needDisc(){if(discOK(draft))return false;flash('Choose a discount or tick “No discount” first');const el=document.getElementById('discPanel');if(el)el.scrollIntoView({behavior:'smooth',block:'center'});return true}
 async function savePlan(quiet){
+  if(!quiet&&!adminName()){const el=document.getElementById('adminName');flash('Type your name under Approval & signatures, so the history shows who saved');if(el){el.scrollIntoView({behavior:'smooth',block:'center'});el.focus()}return}
   if(!quiet&&draft.status!=='Requested'&&needDisc())return;
   const p=draft;p.id=p.id||('p'+uid());
   const prev=saved;const note=historyNote(prev,p);
-  p.history=[...(p.history||[]),{at:new Date().toISOString(),what:note}];
+  p.history=[...(p.history||[]),{at:new Date().toISOString(),what:note,by:adminName()||'Admin'}];
   p.updated=new Date().toISOString();
   p.year=p.year||viewYear;const doc=clone(p);delete doc.mode;doc.year=p.year;
-  try{const rq=p.requestId;delete doc.requestId;await api('savePlan',{plan:doc,requestId:rq||''});delete p.requestId;if(rq)requests=requests.filter(r=>r.id!==rq);const i=plans.findIndex(x=>x.id===doc.id);if(i>=0)plans[i]=clone(doc);else plans.push(clone(doc));saved=clone(doc);flash(quiet?'Marked paid':'Saved');if(quiet)render();else rerenderEditor()}catch(e){p.history.pop();if(e.code!=='wrong_pin')flash('Could not save: '+(e.message||e.code||'no connection'))}
+  flash(quiet?'Updating…':'Saving… please wait',true);busy(true);
+  try{const rq=p.requestId;delete doc.requestId;await api('savePlan',{plan:doc,requestId:rq||''});delete p.requestId;if(rq)requests=requests.filter(r=>r.id!==rq);const i=plans.findIndex(x=>x.id===doc.id);if(i>=0)plans[i]=clone(doc);else plans.push(clone(doc));saved=clone(doc);flash(quiet?'Marked paid':'Saved');busy(false);if(quiet)render();else rerenderEditor()}catch(e){busy(false);p.history.pop();if(e.code!=='wrong_pin')flash('Could not save: '+(e.message||e.code||'no connection'))}
 }
 async function saveCfg(c){
   const d=clone(c);d.year=viewYear;delete d.copiedFrom;configs[viewYear]=d;applyYear();
-  try{await api('saveConfig',{year:viewYear,cfg:d});flash(viewYear+' settings saved');cfgDraft=clone(cfg);rerenderSettings()}catch(e){if(e.code!=='wrong_pin')flash('Could not save: '+(e.message||e.code||'no connection'))}
+  flash('Saving settings… please wait',true);busy(true,'Saving…');
+  try{await api('saveConfig',{year:viewYear,cfg:d});busy(false);flash(viewYear+' settings saved');cfgDraft=clone(cfg);rerenderSettings()}catch(e){busy(false);if(e.code!=='wrong_pin')flash('Could not save: '+(e.message||e.code||'no connection'))}
 }
 async function quickPaid(id,ti,k){const p=plans.find(x=>x.id===id);if(!p)return;draft=clone(p);saved=clone(p);draft.inst[ti].paid=draft.inst[ti].paid||[];draft.inst[ti].paid[k]=true;await savePlan(true)}
 
@@ -481,7 +514,7 @@ function viewEditor(){
   const parentPart=isPlan?`<div class="panel" style="--dot:var(--blue)"><h3>Parent / guardian</h3><div class="fields">
     ${F('parent.name','Full name (as per IC)')}${F('parent.ic','IC / passport no.')}${F('parent.relation','Relationship','select','',['Mother','Father','Guardian'])}${F('parent.phone','Mobile','tel')}${F('parent.email','Email','email','wide')}${F('parent.address','Home address','textarea','wide')}${F('parent.name2','Second parent (optional)')}${F('parent.phone2','Second parent mobile','tel')}</div></div>
     <div class="panel" style="--dot:var(--red)"><h3>Child &amp; request</h3><div class="fields">${F('child.name','Child’s full name','text','wide')}${F('child.dob','Date of birth','date')}${F('child.newStudent','New or existing','select','',['New','Existing'])}${F('child.siblings','Siblings at TJC (name & class)','text','wide')}${F('requestDate','Request date','date')}${F('preferred','Parent’s preferred arrangement')}${F('reason','Reason for request','textarea','wide')}</div></div>`:'';
-  const hist=isPlan?`<div class="panel" style="--dot:var(--muted)"><h3>History</h3>${(draft.history||[]).length?`<ul class="hist">${[...draft.history].reverse().map(h=>`<li><time>${fmtDT(h.at)}</time><span>${esc(h.what)}</span></li>`).join('')}</ul>`:'<div class="small muted">Changes appear here each time you save.</div>'}</div>`:'';
+  const hist=isPlan?`<div class="panel" style="--dot:var(--muted)"><h3>History</h3>${(draft.history||[]).length?`<ul class="hist">${[...draft.history].reverse().map(h=>`<li><time>${fmtDT(h.at)}</time><span>${esc(h.what)}${h.by?` <span class="muted">· ${esc(h.by)}</span>`:''}</span></li>`).join('')}</ul>`:'<div class="small muted">Changes appear here each time you save.</div>'}</div>`:'';
   return `${copyBanner()}<div class="spread"><div><h1>${isPlan?(draft.id?esc(draft.child.name||'Instalment record'):'New Instalment Request'):'Fee Calculator'}</h1>
   <p class="sub">${isPlan?'Key in the parent’s request, set up the fees and the instalment schedule, then save. Each save is kept in the history.':'Work out prorated fees and an instalment schedule for any start date. Nothing is saved unless you turn it into a record.'}</p></div>
   ${isPlan?'<button class="btn" data-back>← All records</button>':''}</div>${steps}
@@ -491,22 +524,26 @@ function viewEditor(){
     ${F('calc.program','Programme','select','wide',cfg.programs.map(p=>[p.id,p.name+' · initial '+rm(p.deposit)]))}
     ${F('calc.startHalf','Charge the start month as','select','wide',[['auto','Auto from start date — '+autoTxt],['full','Full month (1st–15th)'],['half','Half month (16th–end of month)']])}
     ${F('calc.holiday','Holiday care','select','',[['none','None'],['annual','Annual (every term)'],['weekly','Weekly (as needed)']])}
-    ${F('calc.deposit','Initial payment','select','',[['collect','Collect in first term'],['paid','Already paid, offset only'],['none','Not applicable']])}
+    ${F('calc.deposit','Initial payment','select','',[['collect','Collect with 1st instalment'],['paid','Already paid (offset only)'],['none','Not applicable']])}
+    ${c.deposit==='paid'?F('calc.depositPaidOn','Initial payment paid on','date'):''}
+    ${F('calc.student','Student','select',c.deposit==='paid'?'':'wide',[['New','New student'],['Existing','Existing student']])}
     ${c.holiday==='weekly'?`<div class="wide fields g-3">${cfg.terms.map((t,i)=>`<label class="f">${esc(t.name)} weeks<input type="number" min="0" max="6" data-b="calc.weeks.${i}" value="${+(c.weeks||[])[i]||0}"></label>`).join('')}</div>`:''}
   </div></div>
   <div class="panel" style="--dot:var(--red)"><h3>Items to leave out</h3><p class="small muted" style="margin:-6px 0 10px">Tick anything not needed or waived for this child.</p>
-  ${items.length?items.map(it=>{const ex=(c.excluded||{})[it.id];const pq=(c.partsQty||{})[it.id]||{};return `<div class="lo"><div class="spread"><label class="row" style="gap:10px;font-weight:700"><input type="checkbox" data-ex="${it.id}" ${ex?'checked':''}> ${esc(it.name)}</label>${ex?`<select data-exr="${it.id}" style="width:auto">${['Waived','Not needed'].map(o=>`<option ${ex===o?'selected':''}>${o}</option>`).join('')}</select>`:''}</div>${it.parts&&it.parts.length&&!ex?`<div class="lo-parts">${it.parts.map((pt,k)=>{const q=+pt.qty||1,ch=pq[k]==null?q:+pq[k];return `<div class="lo-p"><span>${q>1?`<select data-pq="${it.id}|${k}" aria-label="${esc(pt.name)}">${Array.from({length:q+1},(_,n)=>q-n).map(n=>`<option value="${n}" ${n===ch?'selected':''}>${n?n+' '+(pt.unit||'pc')+(n>1?'s':''):'None'}</option>`).join('')}</select>`:`<input type="checkbox" data-pq="${it.id}|${k}" ${ch?'checked':''} aria-label="Include ${esc(pt.name)}">`} ${esc(pt.name)}</span><span class="muted">${rm(pt.amt)}${q>1?' each':''}</span></div>`}).join('')}<div class="small muted" style="margin-top:4px">Untick or reduce anything the child doesn’t need.</div></div>`:''}</div>`}).join(''):'<div class="small muted">No fee items for this programme. Add them in Fee settings.</div>'}</div>
+  ${items.length?items.map(it=>{const ex=(c.excluded||{})[it.id];const pq=(c.partsQty||{})[it.id]||{};return `<div class="lo"><div class="spread"><label class="row" style="gap:10px;font-weight:700"><input type="checkbox" data-ex="${it.id}" ${ex?'checked':''}> ${esc(it.name)}</label>${ex?`<select data-exr="${it.id}" style="width:auto">${['Waived','Not needed'].map(o=>`<option ${ex===o?'selected':''}>${o}</option>`).join('')}</select>`:''}</div>${!ex&&(it.freq==='once'||(c.override||{})[it.id])?`<div class="lo-adj">${adjOpen.has(it.id)||((c.override||{})[it.id]||{}).amt?`<label class="f">Charge instead (RM)<input type="number" step="0.01" data-b="calc.override.${it.id}.amt" value="${esc(((c.override||{})[it.id]||{}).amt??'')}" placeholder="standard amount"></label><label class="f">Reason / items left out<input data-b="calc.override.${it.id}.note" value="${esc(((c.override||{})[it.id]||{}).note??'')}" placeholder="e.g. Prorated – joined in June"></label>`:`<button class="btn small ghost" data-adj="${it.id}" style="color:var(--blue);padding:2px 0">Change amount</button>`}</div>`:''}${it.parts&&it.parts.length&&!ex?`<div class="lo-parts">${it.parts.map((pt,k)=>{const q=+pt.qty||1,ch=partQty(c,it,k),lock=pt.req&&(c.student||'New')==='Existing';return `<div class="lo-p"><span>${lock?`<input type="checkbox" checked disabled aria-label="${esc(pt.name)} required">`:q>1?`<select data-pq="${it.id}|${k}" aria-label="${esc(pt.name)}">${Array.from({length:q+1},(_,n)=>q-n).map(n=>`<option value="${n}" ${n===ch?'selected':''}>${n?n+' '+(pt.unit||'pc')+(n>1?'s':''):'None'}</option>`).join('')}</select>`:`<input type="checkbox" data-pq="${it.id}|${k}" ${ch?'checked':''} aria-label="Include ${esc(pt.name)}">`} ${esc(pt.name)}${lock?' <span class="chip" style="font-size:11px">required for existing students</span>':''}</span><span class="muted">${rm(pt.amt)}${q>1?' each':''}</span></div>`}).join('')}<div class="small muted" style="margin-top:4px">${(c.student||'New')==='Existing'?'Existing student: set to the usual items for returning children. Adjust if needed.':'Untick or reduce anything the child doesn’t need.'}</div></div>`:''}</div>`}).join(''):'<div class="small muted">No fee items for this programme. Add them in Fee settings.</div>'}</div>
   <div class="panel" id="discPanel" style="--dot:var(--blue)"><h3>Discounts <span class="chip red" style="text-transform:none;letter-spacing:0">Required</span></h3>${!discOK(draft)?`<div class="note-box" style="margin:-4px 0 12px;background:var(--t2);color:var(--t2-ink)">Choose the discount for this child, or tick <b>No discount</b>, before the breakdown is used.</div>`:''}
   ${(c.discounts||[]).map((d,i)=>`<div class="fields g-disc">
     <label class="f">What it’s for<input data-b="calc.discounts.${i}.label" value="${esc(d.label)}"></label>
     <label class="f">%<input type="number" step="0.5" data-b="calc.discounts.${i}.pct" value="${esc(d.pct)}"></label>
     <label class="f">or RM<input type="number" step="0.01" data-b="calc.discounts.${i}.amt" value="${esc(d.amt)}"></label>
-    <label class="f">Apply to<select data-b="calc.discounts.${i}.scope"><option value="each" ${d.scope!=='first'?'selected':''}>Every term</option><option value="first" ${d.scope==='first'?'selected':''}>First term only</option></select></label>
+    <label class="f">On<select data-b="calc.discounts.${i}.on"><option value="" ${!d.on?'selected':''}>All discountable fees</option>${cfg.items.filter(x=>(x.programs||[]).includes(c.program)&&x.freq!=='once').map(x=>`<option value="${x.id}" ${d.on===x.id?'selected':''}>${esc(x.name)} only</option>`).join('')}</select></label>
+    <label class="f">Terms<select data-b="calc.discounts.${i}.scope"><option value="each" ${d.scope!=='first'?'selected':''}>Every term</option><option value="first" ${d.scope==='first'?'selected':''}>First term only</option></select></label>
     <button class="btn ghost danger" data-deldisc="${i}" aria-label="Remove discount">✕</button></div>`).join('')}
-  <div class="row">${cfg.discounts.map((d,i)=>`<button class="btn small" data-adddisc="${i}">+ ${esc(d.label)} ${d.pct}%</button>`).join('')}<button class="btn small" data-adddisc="custom">+ Other discount</button></div>
-  <label class="row" style="gap:8px;margin-top:10px;font-weight:700"><input type="checkbox" data-nodisc ${c.noDiscount&&!(c.discounts||[]).length?'checked':''} ${(c.discounts||[]).length?'disabled':''}> No discount for this child</label>
-  <p class="small muted" style="margin:10px 0 0">Percentages apply to discountable fees (Structural, Curriculum and ASP unless changed in Fee settings). Several discounts add up rather than compound.</p></div>
-  ${isPlan?`<div class="panel" style="--dot:var(--sun)"><h3>Approval &amp; signatures</h3><div class="fields">${F('status','Status','select','wide',STATUSES)}${F('principal.name','Principal’s name')}${F('principal.date','Principal signed on','date')}${F('parentSign.name','Parent signed as')}${F('parentSign.date','Parent signed on','date')}${F('notes','Admin notes','textarea','wide')}</div></div>`:''}
+  <div class="row">${cfg.discounts.map((d,i)=>`<button class="btn small" data-adddisc="${i}">+ ${esc(d.label)} ${d.pct}%${d.on?' <span class="muted" style="font-weight:600">· '+esc(((cfg.items.find(x=>x.id===d.on)||{}).name||'').replace(' Fee',''))+'</span>':''}</button>`).join('')}<button class="btn small" data-adddisc="custom">+ Other discount</button></div>
+  <label class="row" style="gap:8px;margin-top:12px;font-weight:700"><input type="checkbox" data-b-cb="calc.dumc" ${c.dumc?'checked':''}> DUMC Staff <span class="small muted" style="font-weight:600">· DUMC pays the tuition fee; parent pays only the semester fee</span></label>
+  <label class="row" style="gap:8px;margin-top:8px;font-weight:700"><input type="checkbox" data-nodisc ${c.noDiscount&&!(c.discounts||[]).length?'checked':''} ${(c.discounts||[]).length||c.dumc?'disabled':''}> No discount for this child</label>
+  <p class="small muted" style="margin:10px 0 0">Each discount is worked out on the fees chosen under “On” (the sibling discount is on the Curriculum Fee only). With DUMC Staff, discounts on the Curriculum Fee use the semester fee. Several discounts add up rather than compound.</p></div>
+  ${isPlan?`<div class="panel" style="--dot:var(--sun)"><h3>Approval &amp; signatures</h3><div class="fields">${F('status','Status','select','wide',STATUSES)}${F('principal.name','Principal’s name')}${F('principal.date','Principal signed on','date')}${F('parentSign.name','Parent signed as')}${F('parentSign.date','Parent signed on','date')}${F('notes','Admin notes','textarea','wide')}<label class="f wide">Your name (saved with each change in the history)<input id="adminName" value="${esc(adminName())}" placeholder="e.g. MJ"></label></div></div>`:''}
   ${hist}</div>
   <div class="stack" id="result"></div></div>`;
 }
@@ -517,16 +554,19 @@ function renderResult(){
   if(res.first<0){el.innerHTML='<div class="panel empty">The start date falls outside the '+cfg.year+' school months (January to November).</div>';return}
   const all=allInst(draft);
   const actions=isPlan?`<button class="btn primary" data-save>Save record</button>
-    <div class="dl"><button class="btn small" data-pdf="agree">Agreement PDF</button><button class="btn small" data-pdf="form">Application form PDF</button><button class="btn small" data-pdf="statement">Instalment statement PDF</button><button class="btn small ghost" data-html="agree">Agreement HTML</button></div>${draft.id?'<button class="btn ghost danger small" data-del>Delete record</button>':''}`
+    <div class="dl"><button class="btn small primary" data-pdf="pack">Agreement pack PDF</button><button class="btn small" data-pdf="form">Application form PDF</button></div>${draft.id?'<button class="btn ghost danger small" data-del>Delete record</button>':''}`
     :`<button class="btn primary" data-toplan>Make this an instalment record</button><button class="btn small" data-pdf="quote">Fee breakdown PDF</button><button class="btn ghost" data-reset>Start over</button>`;
   const head=`<div class="panel"><h3 style="--dot:var(--navy)">Total for ${cfg.year}</h3><div style="font:800 34px/1 var(--f-display);color:var(--navy);font-variant-numeric:tabular-nums">${rm(res.year)}</div>
   <div class="small muted" style="margin:6px 0 14px">${esc(res.prog.name)} · ${esc(draft.calc.age)} · ${all.length} payment${all.length===1?'':'s'} from ${fmtD(all[0]?.due)} to ${fmtD(all[all.length-1]?.due)}</div><div class="row">${actions}</div></div>`;
   const terms=res.terms.map(t=>{const s=draft.inst[t.ti],sum=r2(s.amounts.reduce((a,b)=>a+(+b||0),0)),mx=maxInst(t);
-    return `<div class="term k${t.ti%3}"><div class="term-h"><b>${esc(t.name)} · ${t.range}</b><small>${t.prorated?'Prorated · '+fmtU(t.units)+' of '+t.tm:t.isFirst?'First term · full':'Full term'}</small></div>
-    <div class="lines">${t.lines.map(l=>`<div class="ln ${l.kind} ${l.struck?'struck':''}"><span class="lbl">${esc(l.label)}${l.note?`<span class="note">${esc(l.note)}</span>`:''}</span><span class="amt">${rm(l.struck?l.orig:l.amt)}</span></div>`).join('')}
+    const ed=editTerms.has(t.ti),man=(draft.calc.manual||{})[t.ti]||{};
+    return `<div class="term k${t.ti%3}"><div class="term-h"><b>${esc(t.name)} · ${t.range}</b><span class="row" style="gap:10px"><small>${t.prorated?'Prorated · '+fmtU(t.units)+' of '+t.tm:t.isFirst?'First term · full':'Full term'}</small><button class="btn small" data-editterm="${t.ti}" style="padding:2px 10px">${ed?'Done':'Edit amounts'}</button></span></div>
+    <div class="lines">${t.lines.map(l=>`<div class="ln ${l.kind} ${l.struck?'struck':''} ${l.edited||l.extra?'edited':''}"><span class="lbl">${esc(l.label)}${l.note?`<span class="note">${esc(l.note)}</span>`:''}</span>${ed&&!l.struck?(l.extra?`<span class="row" style="gap:4px;flex-wrap:nowrap"><input type="number" step="0.01" data-xamt="${t.ti}|${l.xi}" value="${(((draft.calc.extra||{})[t.ti]||[])[l.xi]||{}).amt??''}" style="width:110px;text-align:right" aria-label="Amount"><button class="btn ghost danger small" data-xdel="${t.ti}|${l.xi}" aria-label="Remove line">✕</button></span>`:`<input type="number" step="0.01" data-man="${t.ti}|${esc(lineKey(l))}" value="${man[lineKey(l)]??''}" placeholder="${l.amt}" style="width:120px;text-align:right" aria-label="Amount for ${esc(l.label)}">`):`<span class="amt">${rm(l.struck?l.orig:l.amt)}</span>`}</div>`).join('')}
+    ${ed?`<div class="ln" style="gap:6px"><input data-xnew-label="${t.ti}" placeholder="Add a charge or credit (e.g. Late registration)" style="flex:1;min-width:0"><input type="number" step="0.01" data-xnew-amt="${t.ti}" placeholder="RM" style="width:110px;text-align:right"><button class="btn small" data-xadd="${t.ti}">Add</button></div><div class="small muted" style="padding:4px 0 6px">Type a new amount to replace the calculated one; leave blank to use the calculation. Use a minus amount for a credit. Edits are recorded in the history with your name.</div>`:''}
     <div class="ln tot"><span>Term total</span><span>${rm(t.total)}</span></div></div>
     <div class="inst"><div class="spread" style="margin-bottom:6px"><b class="small">Instalments</b><label class="row small muted" style="gap:6px">Pay in <select data-n="${t.ti}" style="width:auto">${[...Array(mx)].map((_,i)=>`<option value="${i+1}" ${s.n===i+1?'selected':''}>${i?(i+1)+' instalments':'1 payment'}</option>`).join('')}</select> max ${mx}</label></div>
     <table><tbody>${[...Array(s.n)].map((_,k)=>`<tr><td class="small muted" style="width:28px">${k+1}.</td><td><input type="date" data-due="${t.ti}|${k}" value="${s.dues[k]}" aria-label="Due date ${k+1}"></td><td><input type="number" step="0.01" data-amt="${t.ti}|${k}" value="${s.amounts[k]}" aria-label="Amount ${k+1}" style="text-align:right"></td>${isPlan?`<td style="white-space:nowrap"><label class="row small" style="gap:5px;font-weight:700"><input type="checkbox" data-paid="${t.ti}|${k}" ${(s.paid||[])[k]?'checked':''}>Paid</label></td>`:''}</tr>`).join('')}</tbody></table>
+    ${t.up&&s.n>1?`<div class="small muted" style="margin-top:6px">1st instalment includes ${rm(t.up)} collected up front (${t.lines.filter(l=>l.up&&!l.struck&&l.amt).map(l=>l.label.replace(' – semester fee','')).join(', ')}).</div>`:''}
     ${sum!==t.total?`<div class="note-box" style="margin-top:8px">These add up to ${rm(sum)} but the term total is ${rm(t.total)}. <button class="btn small" data-resplit="${t.ti}">Split evenly</button></div>`:''}</div></div>`}).join('');
   el.innerHTML=head+terms+`<p class="small muted">${esc(fillT(cfg.remarks.breakdown))} Only the first term is prorated. Later terms are charged in full, and ${esc(cfg.terms[cfg.terms.length-1].name)} is the full fee less the initial payment.</p>`;
 }
@@ -534,12 +574,12 @@ function renderResult(){
 /* ---------- printable documents ---------- */
 const DOC_CSS=`.doc{font:10.5pt/1.5 Arial,Helvetica,sans-serif;color:#1b2a3d;background:#fff;width:100%;max-width:700px;margin:0;padding:2px 0}
 .doc *{box-sizing:border-box}.doc h1{font-size:15pt;margin:0;color:#1a3b5e}.doc h2{font-size:11pt;margin:18px 0 6px;color:#d23f37;page-break-after:avoid}
-.doc table{border-collapse:collapse;width:100%;font-size:9.5pt}.doc td,.doc th{border:1px solid #c9ccd2;padding:5px 8px;text-align:left;vertical-align:top}.doc th{background:#f1f4f8}
+.doc table{border-collapse:collapse;width:100%;font-size:9.5pt;border:1.4px solid #44546a}.doc td,.doc th{border:1px solid #8c97a7;padding:5px 8px;text-align:left;vertical-align:top}.doc th{background:#e6ecf4;color:#1b2a3d}
 .doc tr{page-break-inside:avoid}.doc p{page-break-inside:avoid}.doc .r{text-align:right}.doc .hd{display:flex;gap:14px;align-items:center;border-bottom:3px solid #1a3b5e;padding-bottom:10px;margin-bottom:14px}
 .doc .hd img{width:64px;height:64px}.doc .hd small{display:block;font-size:8pt;color:#555}.doc .title{font-size:13pt;font-weight:bold;margin:4px 0 8px;color:#1b2a3d}
 .doc .bx{display:inline-block;width:11px;height:11px;border:1px solid #333;margin:0 5px 0 0;vertical-align:-1px}.doc .bx.on{background:#1a3b5e}.doc .opt{display:inline-block;margin-right:14px;white-space:nowrap}
 .doc .sig{display:flex;gap:40px;margin-top:34px;page-break-inside:avoid}.doc .sig div{flex:1;border-top:1px solid #333;padding-top:6px;font-size:9.5pt;min-height:70px}
-.doc ol{padding-left:18px;margin:4px 0}.doc .office{margin-top:16px;border:2px solid #1a3b5e;border-radius:8px;overflow:hidden;page-break-inside:avoid}.doc .office .oh{background:#1a3b5e;color:#fff;font-weight:bold;padding:6px 10px;font-size:10.5pt}.doc .office table td{border-color:#c9d2df}.doc .office tr:first-child td{border-top:0}.doc .office td:first-child{border-left:0}.doc .office td:last-child{border-right:0}.doc .office tr:last-child td{border-bottom:0}.doc ol li{margin-bottom:5px}.doc .tag{font-size:8pt;color:#666}.doc .v{font-weight:bold}.doc .blank{height:24px}`;
+.doc ol{padding-left:26px;margin:4px 0}.doc .pb{page-break-before:always;height:0}.doc .copy{float:right;border:1.5px solid #d23f37;color:#d23f37;font-weight:bold;font-size:9pt;padding:3px 10px;border-radius:4px;letter-spacing:.05em;margin-top:6px}.doc .office{margin-top:16px;border:2px solid #1a3b5e;border-radius:8px;overflow:hidden;page-break-inside:avoid}.doc .office .oh{background:#1a3b5e;color:#fff;font-weight:bold;padding:6px 10px;font-size:10.5pt}.doc .office table td{border-color:#8c97a7}.doc .office tr:first-child td{border-top:0}.doc .office td:first-child{border-left:0}.doc .office td:last-child{border-right:0}.doc .office tr:last-child td{border-bottom:0}.doc ol li{margin-bottom:5px}.doc .tag{font-size:8pt;color:#666}.doc .v{font-weight:bold}.doc .blank{height:24px}`;
 function docHead(title){const s=cfg.school;return `<div class="hd"><img src="${LOGO}" alt=""><div><h1>${esc(s.name)}</h1><small>${esc(s.company)}<br>${esc(s.address)}<br>${esc(s.phone)} · ${esc(s.email)}</small></div></div><div class="title">${title}</div>`}
 const val=v=>v?`<span class="v">${esc(v)}</span>`:'';
 const bx=(on,l)=>`<span class="opt"><span class="bx ${on?'on':''}"></span>${l}</span>`;
@@ -548,11 +588,11 @@ function breakdownBlock(p){
   return res.terms.map(t=>`<h2>${esc(t.name)} (${t.range})${t.prorated?' · prorated '+fmtU(t.units)+' of '+t.tm:''}</h2><table>${t.lines.map(l=>`<tr><td>${esc(l.label)}${l.note?`<div class="tag">${esc(l.note)}</div>`:''}</td><td class="r" style="width:130px">${l.struck?'—':rm(l.amt)}</td></tr>`).join('')}<tr><th>Term total</th><th class="r">${rm(t.total)}</th></tr></table>`).join('')
   +`<h2>Payment schedule</h2><table><tr><th style="width:40px">No.</th><th>Term</th><th>Due date</th><th class="r">Amount</th></tr>${all.map((i,n)=>`<tr><td>${n+1}</td><td>${esc(cfg.terms[i.ti].name)} (${i.k+1} of ${i.n})</td><td>${fmtD(i.due)}</td><td class="r">${rm(i.amt)}</td></tr>`).join('')}<tr><th colspan="3">Total payable for ${cfg.year}</th><th class="r">${rm(res.year)}</th></tr></table>`;
 }
-function agreementDoc(p){
+function agreementDoc(p,copy){
   const s=cfg.school,blank=!p,last=cfg.terms[cfg.terms.length-1].name;
   const row=(l,v)=>`<tr><td style="width:36%">${l}</td><td class="${blank?'blank':''}">${blank?'':val(v)}</td></tr>`;
   const sched=blank?`<h2>Fee breakdown and payment schedule</h2><table><tr><th style="width:40px">No.</th><th>Term</th><th>Due date</th><th class="r">Amount (RM)</th></tr>${[1,2,3,4,5,6,7,8].map(i=>`<tr><td>${i}</td><td></td><td></td><td></td></tr>`).join('')}<tr><th colspan="3">Total payable for ${cfg.year}</th><th></th></tr></table><p class="tag">Attach the fee breakdown prepared by the school office.</p>`:breakdownBlock(clone(p));
-  return `<div class="doc">${docHead('Instalment Payment Agreement · '+cfg.year)}
+  return `<div class="doc">${copy?`<div class="copy">${copy}</div>`:''}${docHead('Instalment Payment Agreement · '+cfg.year)}
   <p>${esc(fillT(cfg.remarks.agreementIntro))}</p>
   <h2>1. Parent and child</h2><table>${row('Parent / guardian',p?.parent.name)}${row('IC / passport no.',p?.parent.ic)}${row('Relationship',p?.parent.relation)}${row('Mobile / email',p?[p.parent.phone,p.parent.email].filter(Boolean).join(' / '):'')}${row('Home address',p?.parent.address)}${row('Child’s name',p?.child.name)}${row('Age group / programme',p?p.calc.age+' · '+progOf(cfg,p.calc.program).name:'')}${row('Start date',p?fmtD(p.calc.enrolDate):'')}</table>
   ${sched}
@@ -609,7 +649,7 @@ async function downloadExcel(btn){
       recs.push({'Child':p.child.name,'Parent':p.parent.name,'IC / passport':p.parent.ic,'Mobile':p.parent.phone,'Email':p.parent.email,'Age group':p.calc.age,'Programme':progOf(cfg,p.calc.program).name,'Status':shownStatus(p),'Request date':p.requestDate,'Start date':p.calc.enrolDate,'Discounts':(p.calc.discounts||[]).map(d=>d.label+(+d.pct?' '+d.pct+'%':' RM'+d.amt)).join(', ')||(p.calc.noDiscount?'None':''),'Year total (RM)':tot,'Instalments':a.length,'Paid':a.filter(i=>i.paid).length,'Paid (RM)':r2(a.filter(i=>i.paid).reduce((x,i)=>x+i.amt,0)),'Overdue (RM)':r2(out.reduce((x,i)=>x+i.amt,0)),'First due':a[0]?.due||'','Last due':a[a.length-1]?.due||'','Principal signed':p.principal?.date||'','Parent signed':p.parentSign?.date||'','Notes':p.notes||''});
       for(const i of a){ins.push({'Child':p.child.name,'Parent mobile':p.parent.phone,'Term':cfg.terms[i.ti]?.name||'','No.':i.k+1,'Of':i.n,'Due date':i.due,'Amount (RM)':i.amt,'Status':instState(i,today)[1]});
         const m=i.due.slice(0,7);mon[m]=mon[m]||{due:0,paid:0,unpaid:0,count:0};mon[m].due+=i.amt;mon[m][i.paid?'paid':'unpaid']+=i.amt;mon[m].count++}
-      for(const h of (p.history||[]))hist.push({'Child':p.child.name,'Date & time':fmtDT(h.at),'Change':h.what});
+      for(const h of (p.history||[]))hist.push({'Child':p.child.name,'Date & time':fmtDT(h.at),'Change':h.what,'By':h.by||''});
     }
     const months=Object.keys(mon).sort().map(m=>({'Month':MON[+m.slice(5)-1]+' '+m.slice(0,4),'Instalments due':mon[m].count,'Due (RM)':r2(mon[m].due),'Paid (RM)':r2(mon[m].paid),'Not paid (RM)':r2(mon[m].unpaid)}));
     const wb=XLSX.utils.book_new(),add=(rows,name,empty)=>{const ws=XLSX.utils.json_to_sheet(rows.length?rows:[{[empty]:'None yet'}]);const keys=Object.keys((rows[0]||{[empty]:''}));ws['!cols']=keys.map(k=>({wch:Math.min(40,Math.max(k.length+2,...rows.map(r=>String(r[k]??'').length+1)))}));XLSX.utils.book_append_sheet(wb,ws,name)};
@@ -637,8 +677,22 @@ function reportDoc(kind){
   return `<div class="doc">${docHead(title)}<p class="tag" style="font-size:9pt">${sub}</p>${sumTable(sums(list))}
   <h2>Details</h2><table><tr><th>Due date</th><th>Child</th><th>Parent / mobile</th><th>Instalment</th><th class="r">Amount</th><th>Status</th></tr>${list.map(i=>`<tr><td>${fmtD(i.due)}</td><td><b>${esc(i.p.child.name)}</b></td><td>${esc(i.p.parent.name)}<div class="tag">${esc(i.p.parent.phone)}</div></td><td>${esc(cfg.terms[i.ti].name)} (${i.k+1}/${i.n})</td><td class="r">${rm(i.amt)}</td><td>${stTag(i)}</td></tr>`).join('')||'<tr><td colspan="6">Nothing to show.</td></tr>'}</table></div>`;
 }
-function docFor(kind,p){return kind==='agree'?agreementDoc(p):kind==='form'?formDoc(p):kind==='statement'?statementDoc(p):quoteDoc(p)}
-function docName(kind,p){const who=p&&p.child&&p.child.name?' - '+p.child.name.replace(/[^\w\s-]/g,'').trim():'';return ({agree:'TJC Instalment Agreement',form:'TJC Instalment Application Form',quote:'TJC Fee Breakdown',statement:'TJC Instalment Statement'}[kind])+' '+viewYear+(p?who:' (blank)')}
+function packDoc(p){
+  const s=cfg.school,c=p.calc,pr=progOf(cfg,c.program),row=(l,v)=>`<tr><td style="width:36%">${l}</td><td class="v">${esc(v||'')}</td></tr>`;
+  const disc=[...(c.discounts||[]).map(d=>(d.label||'Discount')+(+d.pct?' '+d.pct+'%':' RM'+d.amt)),...(c.dumc?['DUMC Staff (semester fee only)']:[])].join(', ')||(c.noDiscount?'None':'');
+  const box=l=>`<span class="opt"><span class="bx"></span>${l}</span>`;
+  return `<div class="doc">${docHead('Instalment Agreement Pack · '+esc(p.child.name||'')+' · '+cfg.year)}
+  <p class="tag" style="font-size:9pt">Part 1: request details · Part 2: fee breakdown for the Principal’s approval · Part 3: agreement (parent’s copy and school’s copy).</p>
+  <h2>Part 1 · Request details</h2><table>${row('Parent / guardian',p.parent.name)}${row('IC / passport no.',p.parent.ic)}${row('Relationship',p.parent.relation)}${row('Mobile / email',[p.parent.phone,p.parent.email].filter(Boolean).join(' / '))}${row('Home address',p.parent.address)}${row('Second parent',[p.parent.name2,p.parent.phone2].filter(Boolean).join(' · '))}${row('Child’s name',p.child.name)}${row('Date of birth',p.child.dob?fmtD(p.child.dob):'')}${row('Student',(c.student||p.child.newStudent||'New')+' student')}${row('Siblings at TJC',p.child.siblings)}${row('Age group / programme',c.age+' · '+pr.name)}${row('Start date',fmtD(c.enrolDate))}${row('Holiday care',{none:'None',annual:'Annual',weekly:'Weekly'}[c.holiday]||'')}${row('Preferred arrangement',p.preferred)}${row('Reason for request',p.reason)}${row('Request date',fmtD(p.requestDate))}${row('Discounts',disc)}</table>
+  <div class="pb"></div>
+  <h2 style="margin-top:0">Part 2 · Fee breakdown and instalment schedule</h2>${breakdownBlock(clone(p))}
+  <div class="office" style="margin-top:16px"><div class="oh">PRINCIPAL’S APPROVAL</div><table><tr><td style="width:36%;vertical-align:top">Decision</td><td><div style="margin:2px 0 8px">${box('Approved')}${box('Approved with changes')}${box('Not approved')}</div><div class="tag">Remarks / conditions:</div><div style="height:56px"></div><div style="display:flex;gap:24px"><div style="flex:1;border-top:1px solid #333;padding-top:3px" class="tag">Principal’s signature${p.principal.name||s.principal?' · '+esc(p.principal.name||s.principal):''}</div><div style="flex:1;border-top:1px solid #333;padding-top:3px" class="tag">Date${p.principal.date?' · '+fmtD(p.principal.date):''}</div></div></td></tr><tr><td>Prepared by (Admin)</td><td class="blank"></td></tr></table></div>
+  <h2>Record history</h2><table><tr><th style="width:150px">Date &amp; time</th><th>Change</th><th style="width:110px">By</th></tr>${[...(p.history||[])].map(h=>`<tr><td>${fmtDT(h.at)}</td><td>${esc(h.what)}</td><td>${esc(h.by||'')}</td></tr>`).join('')||'<tr><td colspan="3">No history yet.</td></tr>'}</table>
+  <div class="pb"></div>${agreementDoc(p,'PARENT’S COPY')}
+  <div class="pb"></div>${agreementDoc(p,'SCHOOL’S COPY')}</div>`;
+}
+function docFor(kind,p){return kind==='pack'?packDoc(p):kind==='agree'?agreementDoc(p):kind==='form'?formDoc(p):kind==='statement'?statementDoc(p):quoteDoc(p)}
+function docName(kind,p){const who=p&&p.child&&p.child.name?' - '+p.child.name.replace(/[^\w\s-]/g,'').trim():'';return ({pack:'TJC Instalment Agreement Pack',agree:'TJC Instalment Agreement',form:'TJC Instalment Application Form',quote:'TJC Fee Breakdown',statement:'TJC Instalment Statement'}[kind])+' '+viewYear+(p?who:' (blank)')}
 async function saveFile(filename,data){
   try{const u=URL.createObjectURL(data);const a=document.createElement('a');a.href=u;a.download=filename;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),4000);flash('Downloaded '+filename);return true}catch(e){flash('Could not download the file');return false}
 }
@@ -668,7 +722,7 @@ function viewReports(){
   <div class="panel rep" style="--dot:var(--red)"><h3>Unpaid &amp; overdue</h3><p class="small muted">For follow-up calls: who, how much, and the mobile number.</p><div class="row"><button class="btn" data-rep="overdue">Download PDF</button></div></div>
   <div class="panel rep" style="--dot:var(--navy)"><h3>Year report</h3><p class="small muted">Summary, a line per child, and every instalment with its status.</p><div class="row"><button class="btn" data-rep="year">Download PDF</button></div></div>
   <div class="panel rep" style="--dot:var(--ok)"><h3>Excel workbook</h3><p class="small muted">Records, instalments, totals by month and the full change history for ${viewYear}.</p><div class="row"><button class="btn" data-xl>Download Excel</button></div></div>
-  <div class="panel rep" style="--dot:var(--blue)"><h3>One child</h3><p class="small muted">A statement for a single child is on that child’s record in Instalment Records.</p><div class="row"><button class="btn" data-go="plans">Open records</button></div></div>
+  <div class="panel rep" style="--dot:var(--blue)"><h3>One child</h3><p class="small muted">Each child’s agreement pack (request, breakdown, history and two agreement copies) is on their record.</p><div class="row"><button class="btn" data-go="plans">Open records</button></div></div>
   </div>
   <div class="panel" style="--dot:var(--blue)"><h3>By child</h3>${rows.length?`<div class="tbl"><table><thead><tr><th>Child</th><th class="num">Paid</th><th class="num">Overdue</th><th class="num">To come</th><th>Next due</th></tr></thead><tbody>${rows.map(r=>`<tr class="click" data-open="${r.p.id}"><td><b>${esc(r.p.child.name||'Unnamed')}</b><div class="small muted">${esc(r.p.calc.age)}</div></td><td class="num">${rm(r.s.paid)}</td><td class="num">${r.s.over?`<span class="chip over">${rm(r.s.over)}</span>`:rm(0)}</td><td class="num">${rm(r.s.soon+r.s.up)}</td><td>${r.next?fmtD(r.next.due):'<span class="chip paid">All paid</span>'}</td></tr>`).join('')}</tbody></table></div>`:'<div class="empty">No active instalment plans in '+viewYear+' yet.</div>'}</div>`;
 }
@@ -742,14 +796,15 @@ function viewSettings(){
       <label class="f" style="flex:1 1 190px">Shown when${sel('items.'+ii+'.opt',it.opt||'',[['','Always'],['annual','Annual holiday care chosen'],['weekly','Weekly holiday care chosen']])}</label>
       <button class="btn ghost danger" data-delitem="${ii}" aria-label="Remove ${esc(it.name)}" style="align-self:flex-end">✕</button></div>
     <div class="fi-mid"><div><div class="fi-lbl">Programmes</div><div class="row" style="gap:12px">${progCk(it,ii)}</div></div>
-      <div><div class="fi-lbl">Options</div><div class="row" style="gap:14px"><label class="row small" style="gap:5px;font-weight:700"><input type="checkbox" data-cb="items.${ii}.prorate" ${it.prorate?'checked':''}>Prorate</label><label class="row small" style="gap:5px;font-weight:700"><input type="checkbox" data-cb="items.${ii}.disc" ${it.disc?'checked':''}>Discount applies</label></div></div></div>
+      <div><div class="fi-lbl">Options</div><div class="row" style="gap:14px"><label class="row small" style="gap:5px;font-weight:700"><input type="checkbox" data-cb="items.${ii}.prorate" ${it.prorate?'checked':''}>Prorate</label><label class="row small" style="gap:5px;font-weight:700"><input type="checkbox" data-cb="items.${ii}.disc" ${it.disc?'checked':''}>Discount applies</label><label class="row small" style="gap:5px;font-weight:700"><input type="checkbox" data-cb="items.${ii}.first" ${it.first?'checked':''}>Collect with 1st instalment of the term</label>${it.freq==='term'?`<label class="row small" style="gap:5px;font-weight:700"><input type="checkbox" data-cbr="items.${ii}.dumcOn" ${it.dumcOn?'checked':''}>DUMC split</label>`:''}</div></div></div>
     <div class="fi-ages">${c.ages.map(a=>`<label class="f">${esc(a)} (RM)<input type="number" step="0.01" data-c="items.${ii}.amt.${a}" value="${esc((it.amt||{})[a]??'')}" style="text-align:right"></label>`).join('')}</div>
-    ${it.parts&&it.parts.length?`<div class="fi-parts"><div class="fi-lbl">Breakdown (staff can leave out lines in the calculator) · total ${rm(it.parts.reduce((x,pt)=>x+(+pt.amt||0)*(+pt.qty||1),0))}</div>${it.parts.map((pt,k)=>`<div class="fi-part"><input data-c="items.${ii}.parts.${k}.name" value="${esc(pt.name)}" aria-label="Line name"><label class="row small" style="gap:4px;white-space:nowrap">RM<input type="number" step="0.01" data-c="items.${ii}.parts.${k}.amt" value="${esc(pt.amt)}" style="width:90px;text-align:right" aria-label="Amount each"></label><label class="row small" style="gap:4px;white-space:nowrap">×<input type="number" min="1" data-c="items.${ii}.parts.${k}.qty" value="${esc(pt.qty||1)}" style="width:64px" aria-label="Quantity"></label><button class="btn ghost danger small" data-delpart="${ii}|${k}" aria-label="Remove line">✕</button></div>`).join('')}</div>`:''}
+    ${it.dumcOn?`<div class="fi-parts"><div class="fi-lbl">DUMC Staff · semester fee per term (parent pays; the rest is tuition paid by DUMC)</div><div class="fi-ages">${c.ages.map(a=>`<label class="f">${esc(a)} (RM)<input type="number" step="0.01" data-c="items.${ii}.sem.${a}" value="${esc((it.sem||{})[a]??'')}" style="text-align:right"></label>`).join('')}</div></div>`:''}
+    ${it.parts&&it.parts.length?`<div class="fi-parts"><div class="fi-lbl">Breakdown · “Existing” is the usual quantity for returning students · total ${rm(it.parts.reduce((x,pt)=>x+(+pt.amt||0)*(+pt.qty||1),0))}</div>${it.parts.map((pt,k)=>`<div class="fi-part"><input data-c="items.${ii}.parts.${k}.name" value="${esc(pt.name)}" aria-label="Line name"><label class="row small" style="gap:4px;white-space:nowrap">RM<input type="number" step="0.01" data-c="items.${ii}.parts.${k}.amt" value="${esc(pt.amt)}" style="width:90px;text-align:right" aria-label="Amount each"></label><label class="row small" style="gap:4px;white-space:nowrap">×<input type="number" min="1" data-c="items.${ii}.parts.${k}.qty" value="${esc(pt.qty||1)}" style="width:60px" aria-label="Quantity"></label><label class="row small" style="gap:4px;white-space:nowrap" title="Default quantity for existing students">Existing<input type="number" min="0" data-c="items.${ii}.parts.${k}.ex" value="${esc(pt.ex??pt.qty??1)}" style="width:60px" aria-label="Existing student default"></label><label class="row small" style="gap:4px;white-space:nowrap"><input type="checkbox" data-cb="items.${ii}.parts.${k}.req" ${pt.req?'checked':''}>Required (existing)</label><button class="btn ghost danger small" data-delpart="${ii}|${k}" aria-label="Remove line">✕</button></div>`).join('')}</div>`:''}
     <button class="btn small ghost" data-addpart="${ii}" style="align-self:flex-start;color:var(--blue)">+ Add breakdown line</button>
   </div>`).join('')}</div>
   <div class="row" style="margin-top:12px"><button class="btn small" data-additem>+ Add fee item</button><span class="small muted">Prorate adjusts the first term to the months attended. “Discount applies” marks the fees that discounts are worked out on.</span></div></div>
 
-  <div class="panel" id="s-disc" style="--dot:var(--blue)"><h3>Discount presets</h3>${c.discounts.map((d,i)=>`<div class="fields g-dp"><label class="f">Label<input data-c="discounts.${i}.label" value="${esc(d.label)}"></label><label class="f">%<input type="number" step="0.5" data-c="discounts.${i}.pct" value="${esc(d.pct)}"></label><button class="btn ghost danger" data-deldp="${i}" aria-label="Remove ${esc(d.label)}">✕</button></div>`).join('')}<button class="btn small" data-adddp>+ Add preset</button></div>
+  <div class="panel" id="s-disc" style="--dot:var(--blue)"><h3>Discount presets</h3>${c.discounts.map((d,i)=>`<div class="fields g-dp"><label class="f">Label<input data-c="discounts.${i}.label" value="${esc(d.label)}"></label><label class="f">%<input type="number" step="0.5" data-c="discounts.${i}.pct" value="${esc(d.pct)}"></label><label class="f">On<select data-c="discounts.${i}.on"><option value="" ${!d.on?'selected':''}>All discountable fees</option>${c.items.filter(x=>x.freq!=='once').map(x=>`<option value="${x.id}" ${d.on===x.id?'selected':''}>${esc(x.name)} only</option>`).join('')}</select></label><button class="btn ghost danger" data-deldp="${i}" aria-label="Remove ${esc(d.label)}">✕</button></div>`).join('')}<button class="btn small" data-adddp>+ Add preset</button></div>
 
   <div class="panel" id="s-words" style="--dot:var(--sun)"><h3>Remarks &amp; wording</h3>
   <p class="small muted" style="margin:-6px 0 14px">What prints on each form and PDF, at a glance. Tap <b>Edit</b> to change any of them.</p>
@@ -885,17 +940,21 @@ document.addEventListener('click',async e=>{
   if(d.rep){await makeReport(d.rep,t);return}
   if(d.save!==undefined){await savePlan();return}
   if(d.del!==undefined){if(t.dataset.confirm){try{await api('deletePlan',{id:draft.id})}catch(err){if(err.code==='wrong_pin')return}plans=plans.filter(x=>x.id!==draft.id);flash('Record deleted');view='plans';render()}else{t.dataset.confirm='1';t.textContent='Tap again to delete';setTimeout(()=>{if(t.isConnected){t.dataset.confirm='';t.textContent='Delete record'}},3000)}return}
-  if(d.pdf&&d.blank===undefined&&['agree','quote','statement'].includes(d.pdf)&&needDisc())return;
+  if(d.pdf&&d.blank===undefined&&['agree','quote','statement','pack'].includes(d.pdf)&&needDisc())return;
   if(d.pdf){await makePDF(d.pdf,d.blank!==undefined?null:clone(draft),t);return}
   if(d.html){await makeHTML(d.html,d.blank!==undefined?null:clone(draft));return}
   if(d.toplan!==undefined){const c=draft.calc,inst=draft.inst;draft=blankPlan();draft.calc=c;draft.inst=inst;saved=null;view='edit';render();window.scrollTo(0,0);flash('Add the parent and child details, then save');return}
   if(d.reset!==undefined){draft=blankPlan();draft.mode='calc';render();return}
-  if(d.adddisc){const c=draft.calc;c.noDiscount=false;c.discounts=c.discounts||[];if(d.adddisc==='custom')c.discounts.push({label:'',pct:'',amt:'',scope:'each'});else{const p=cfg.discounts[+d.adddisc];c.discounts.push({label:p.label,pct:p.pct,amt:'',scope:'each'})}rerenderEditor();return}
+  if(d.adddisc){const c=draft.calc;c.noDiscount=false;c.discounts=c.discounts||[];if(d.adddisc==='custom')c.discounts.push({label:'',pct:'',amt:'',scope:'each'});else{const p=cfg.discounts[+d.adddisc];c.discounts.push({label:p.label,pct:p.pct,amt:'',scope:'each',on:p.on||''})}rerenderEditor();return}
   if(d.deldisc){draft.calc.discounts.splice(+d.deldisc,1);rerenderEditor();return}
-  if(d.resplit){const res=compute(cfg,draft.calc),tt=res.terms.find(x=>String(x.ti)===d.resplit),s=draft.inst[d.resplit];s.amounts=split(tt.total,s.n);s.total=tt.total;renderResult();return}
+  if(d.resplit){const res=compute(cfg,draft.calc),tt=res.terms.find(x=>String(x.ti)===d.resplit),s=draft.inst[d.resplit];s.amounts=splitTerm(tt,s.n);s.total=tt.total;s.up=tt.up||0;renderResult();return}
   if(d.archy){archYear=+d.archy;archOpen=null;render();return}
   if(d.archopen){archOpen=archOpen===d.archopen?null:d.archopen;render();return}
   if(t.id==='loginBtn'){await doLogin();return}
+  if(d.editterm!==undefined){const ti=+d.editterm;editTerms.has(ti)?editTerms.delete(ti):editTerms.add(ti);renderResult();return}
+  if(d.xadd!==undefined){const ti=d.xadd,lb=($('[data-xnew-label="'+ti+'"]')||{}).value||'',am=($('[data-xnew-amt="'+ti+'"]')||{}).value||'';if(!lb.trim()||am===''){flash('Enter a description and an amount');return}const x=draft.calc.extra=draft.calc.extra||{};(x[ti]=x[ti]||[]).push({label:lb.trim(),amt:r2(am)});renderResult();return}
+  if(d.xdel){const[ti,xi]=d.xdel.split('|');draft.calc.extra[ti].splice(+xi,1);renderResult();return}
+  if(d.adj){adjOpen.add(d.adj);rerenderEditor();return}
   if(d.import){t.disabled=true;await importRequest(d.import);return}
   if(d.dismiss){if(dismissArm===d.dismiss){try{await api('dismissRequest',{id:d.dismiss});requests=requests.filter(r=>r.id!==d.dismiss);flash('Request dismissed')}catch(e){}dismissArm=null;render()}else{dismissArm=d.dismiss;render();setTimeout(()=>{if(dismissArm===d.dismiss){dismissArm=null;if(view==='plans')render()}},4000)}return}
   if(false&&d.setpin!==undefined){const v=($('#newPin').value||'').trim();if(v.length<4){flash('The PIN needs at least 4 characters');return}try{await api('changePin',{newPin:v});pin=v;try{localStorage.setItem('tjcPin',v)}catch(e){}$('#newPin').value='';flash('PIN changed. Tell the other admins the new PIN.')}catch(e){if(e.code!=='wrong_pin')flash('Could not change the PIN')}return}
@@ -925,12 +984,17 @@ document.addEventListener('click',async e=>{
 document.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.id==='apiIn')doLogin()});
 document.addEventListener('change',e=>{
   const el=e.target,d=el.dataset;
+  if(el.id==='adminName'){try{localStorage.setItem('tjcAdmin',el.value.trim())}catch(e){window.__admin=el.value.trim()}return}
   if(el.id==='formFile'){handleUpload(el.files&&el.files[0]);return}
   if(d.b){let v=el.value;if(el.type==='number')v=v===''?'':+v;set(draft,d.b,v);
     if(d.b==='calc.enrolDate'||d.b==='calc.startHalf')draft.inst={};
-    if(['calc.program','calc.holiday','calc.age','calc.enrolDate','status'].includes(d.b))rerenderEditor();else renderResult();return}
+    if(d.b==='calc.student')draft.child.newStudent=v;if(d.b==='child.newStudent')draft.calc.student=v;
+    if(['calc.program','calc.holiday','calc.age','calc.enrolDate','status','calc.deposit','calc.student','child.newStudent'].includes(d.b))rerenderEditor();else renderResult();return}
+  if(el.dataset.bCb){set(draft,el.dataset.bCb,el.checked);if(el.checked)draft.calc.noDiscount=false;rerenderEditor();return}
   if(d.nodisc!==undefined){draft.calc.noDiscount=el.checked;rerenderEditor();return}
   if(d.ex){draft.calc.excluded=draft.calc.excluded||{};if(el.checked)draft.calc.excluded[d.ex]='Waived';else delete draft.calc.excluded[d.ex];rerenderEditor();return}
+  if(d.man){const i=d.man.indexOf('|'),ti=d.man.slice(0,i),k=d.man.slice(i+1);const m=draft.calc.manual=draft.calc.manual||{};m[ti]=m[ti]||{};if(el.value==='')delete m[ti][k];else m[ti][k]=r2(el.value);renderResult();return}
+  if(d.xamt){const[ti,xi]=d.xamt.split('|');draft.calc.extra[ti][xi].amt=r2(el.value);renderResult();return}
   if(d.pq){const[iid,k]=d.pq.split('|');draft.calc.partsQty=draft.calc.partsQty||{};const m=draft.calc.partsQty[iid]=draft.calc.partsQty[iid]||{};m[k]=el.type==='checkbox'?(el.checked?1:0):+el.value;renderResult();return}
   if(d.exr){draft.calc.excluded[d.exr]=el.value;renderResult();return}
   if(d.n){const res=compute(cfg,draft.calc),tt=res.terms.find(x=>String(x.ti)===d.n);draft.inst[d.n]=makeInst(cfg,tt,+el.value,draft.inst[d.n]);renderResult();return}
@@ -941,12 +1005,13 @@ document.addEventListener('change',e=>{
   if(el.id==='repMonth'||el.id==='repMonth2'){repMonth=+el.value;['repMonth','repMonth2'].forEach(x=>{const o=document.getElementById(x);if(o)o.value=el.value});return}
   if(d.c){let v=el.value;
     if(d.c==='remarks.clauses'){cfgDraft.remarks.clauses=v.split('\n').map(x=>x.trim()).filter(Boolean);return}
-    if(el.type==='number'||/\.(invoice|start|end|maxInst)$/.test(d.c))v=v===''?'':+v;if(/\.parts\.\d+\.(amt|qty)$/.test(d.c)){set(cfgDraft,d.c,v);rerenderSettings();return}set(cfgDraft,d.c,v);
+    if(el.type==='number'||/\.(invoice|start|end|maxInst)$/.test(d.c))v=v===''?'':+v;if(/\.parts\.\d+\.(amt|qty|ex)$/.test(d.c)){set(cfgDraft,d.c,v);rerenderSettings();return}set(cfgDraft,d.c,v);
     if(/^terms\.\d+\.(start|end|maxInst)$/.test(d.c)){normTerms(cfgDraft);rerenderSettings()}
     if(/^programs\.\d+\.code$/.test(d.c))rerenderSettings();
     return}
   if(d.age!==undefined){const i=+d.age,old=cfgDraft.ages[i],nw=el.value.trim();if(!nw||cfgDraft.ages.includes(nw)){el.value=old;return}cfgDraft.ages[i]=nw;for(const it of cfgDraft.items){it.amt=it.amt||{};if(old in it.amt){it.amt[nw]=it.amt[old];delete it.amt[old]}}rerenderSettings();return}
   if(d.cb){set(cfgDraft,d.cb,el.checked);return}
+  if(d.cbr){set(cfgDraft,d.cbr,el.checked);rerenderSettings();return}
   if(d.ip){const[ii,pid]=d.ip.split('|'),it=cfgDraft.items[+ii];it.programs=it.programs||[];if(el.checked){if(!it.programs.includes(pid))it.programs.push(pid)}else it.programs=it.programs.filter(x=>x!==pid);return}
 });
 boot();
