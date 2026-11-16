@@ -66,7 +66,7 @@ h3::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--
 label.f{display:flex;flex-direction:column;gap:4px;font-size:13px;color:var(--muted);font-weight:700;min-width:0}
 .fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
 .fields .wide{grid-column:1/-1}
-.g-disc{grid-template-columns:minmax(0,1.6fr) minmax(0,.7fr) minmax(0,.8fr) minmax(0,1.6fr) minmax(0,1.2fr) auto;align-items:end;margin-bottom:8px}
+.g-disc{grid-template-columns:repeat(4,minmax(0,1fr)) auto;padding-bottom:10px;border-bottom:1px dashed var(--line);align-items:end;margin-bottom:8px}
 .g-3{grid-template-columns:repeat(3,minmax(0,1fr));margin-bottom:8px}
 .g-prog{grid-template-columns:minmax(0,3fr) minmax(0,1fr);margin-bottom:8px}
 .g-dp{grid-template-columns:minmax(0,3fr) minmax(0,1fr) minmax(0,2fr) auto;align-items:end;margin-bottom:8px}
@@ -82,7 +82,7 @@ label.f{display:flex;flex-direction:column;gap:4px;font-size:13px;color:var(--mu
 .rm-h{display:flex;justify-content:space-between;gap:8px;align-items:center;flex-wrap:wrap}.rm-h b{font-size:14px}
 .rm-p{margin:0;font-size:13px;color:var(--muted);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .rm .btn.ghost{align-self:flex-start;padding:2px 0;color:var(--blue)}
-.cl{margin:0;padding-left:22px;display:grid;gap:6px}.cl li{padding-left:4px}.cl li b{display:block;font-size:14px}.cl li span{display:block;font-size:12.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cl{margin:0;padding-left:26px;min-width:0;max-width:100%;display:grid;gap:6px}.cl li{padding-left:4px}.cl li b{display:block;font-size:14px}.cl li{min-width:0}.cl li span{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-size:12.5px;color:var(--muted);overflow-wrap:anywhere}
 details summary::marker{color:var(--muted)}
 .fi-list{display:grid;gap:12px}
 .fi{border:1px solid var(--line);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:12px;background:var(--surface)}
@@ -92,9 +92,11 @@ details summary::marker{color:var(--muted)}
 .fi-ages{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px}
 .fi-parts{background:var(--soft);border-radius:12px;padding:10px 12px;display:grid;gap:6px}
 .fi-part{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.fi-part>input{flex:1;min-width:0}
+.choices-col{display:grid;gap:8px}.radio{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border:2px solid var(--line);border-radius:12px;cursor:pointer}.radio:has(input:checked){border-color:var(--navy);background:var(--soft)}.radio input{width:18px;height:18px;margin-top:2px;accent-color:var(--navy);flex:none}.radio small{display:block;color:var(--muted);font-weight:600}
 .lo{padding:6px 0;border-bottom:1px dashed var(--line)}.lo:last-of-type{border-bottom:0}
 .lo-parts{margin:6px 0 4px 28px;display:grid;gap:4px}
 .lo-p{display:flex;justify-content:space-between;gap:10px;align-items:center;font-size:14px}.lo-p span:first-child{display:flex;gap:8px;align-items:center}
+.lo-p .pn{font-style:normal}.lo-p.off .pn{color:var(--muted);text-decoration:line-through}
 .lo-p select{width:auto;padding:3px 8px;font-size:13px}
 .lo-adj{margin:4px 0 2px 28px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:8px}@media (max-width:520px){.lo-adj{grid-template-columns:minmax(0,1fr)}}
 .rep-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-bottom:16px}
@@ -135,7 +137,7 @@ tr.click{cursor:pointer}tr.click:hover td{background:var(--soft)}
 .term.k0{--tc:var(--t1);--tci:var(--t1-ink)}.term.k1{--tc:var(--t2);--tci:var(--t2-ink)}.term.k2{--tc:var(--t3);--tci:var(--t3-ink)}
 .lines{padding:8px 18px}
 .ln{display:flex;justify-content:space-between;gap:12px;padding:5px 0;font-variant-numeric:tabular-nums}
-.ln .lbl{min-width:0}
+.ln .lbl{min-width:0}.ln .amt{white-space:nowrap}.g-disc>label:first-child{grid-column:1/5}.g-disc>button{grid-column:5;grid-row:1;align-self:end}
 .ln .note{display:block;font-size:12px;color:var(--muted)}
 .ln.disc .amt{color:var(--ok)}.ln.dep .lbl{color:var(--blue);font-weight:700}.ln.struck .amt{text-decoration:line-through;color:var(--muted)}
 .ln.edited .amt,.ln.edited .lbl{color:var(--warn)}
@@ -143,6 +145,7 @@ tr.click{cursor:pointer}tr.click:hover td{background:var(--soft)}
 .inst{border-top:1px solid var(--line);padding:12px 18px 16px;background:var(--soft)}
 .inst table td{padding:5px 6px;border:0}
 .inst input{padding:6px 9px}
+.ib{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:12px;color:var(--muted);padding:0 0 6px}.ib b{color:var(--ink);font-weight:700}.inst table tr.ibr td{padding-top:0}
 .muted{color:var(--muted)}.small{font-size:13px}
 .saving .flash{background:var(--sun);color:#1b2a3d}
 .flash{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--navy);color:var(--navy-ink);padding:10px 18px;border-radius:999px;font-weight:700;font-size:14px;z-index:20;max-width:calc(100% - 32px)}
@@ -189,7 +192,7 @@ const STATUSES=['Requested','Breakdown ready','Principal signed','Active','Decli
 const DEFAULT={
   year:2027, dueDay:7, halfRule:true,
   school:{parentLink:'',feeSheet:'https://docs.google.com/spreadsheets/d/1SkjnQjJIteDYJ3oh1ruLZk-iFp01L6onWGML_Lz8O7s/edit?gid=1995100144#gid=1995100144',name:'Tadika Juara Cerdik',company:'Dream Academy Sdn Bhd (1167259-T)',address:'Dream Centre, 2 Jalan 13/1, Seksyen 13, 46200 Petaling Jaya, Selangor',phone:'03-7498 8484 / 010-317 7152',email:'admin.tjc@dreamacademy.edu.my',principal:'',bank:'Cheque payable to Dream Academy Sdn Bhd, or bank transfer to Public Bank A/C No. 3200061904. Please notify admin.tjc@dreamacademy.edu.my or WhatsApp 010-317 7152 after transfer.'},
-  terms:[{name:'Term 1',months:[1,2,3,4],invoice:1},{name:'Term 2',months:[5,6,7,8],invoice:4},{name:'Term 3',months:[9,10,11],invoice:8}],
+  terms:[{name:'Term 1',months:[1,2,3,4],invoice:12},{name:'Term 2',months:[5,6,7,8],invoice:4},{name:'Term 3',months:[9,10,11],invoice:8}],
   ages:['Age 3','Age 4','Age 5','Age 6'],
   programs:[{id:'mp',name:'Main Programme',deposit:1000},{id:'asp',name:'Main Programme + ASP Core',deposit:1650},{id:'aspe',name:'Main Programme + ASP Core & Extended',deposit:1850}],
   items:[
@@ -245,7 +248,7 @@ const rm=n=>{n=+n||0;const s='RM '+Math.abs(n).toLocaleString('en-MY',{minimumFr
 const clone=o=>JSON.parse(JSON.stringify(o));
 const pad=n=>String(n).padStart(2,'0');
 const todayISO=()=>{const d=new Date();return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate())};
-const iso=(y,m,d)=>{while(m>12){m-=12;y++}const dim=new Date(y,m,0).getDate();return y+'-'+pad(m)+'-'+pad(Math.min(d,dim))};
+const iso=(y,m,d)=>{while(m>12){m-=12;y++}while(m<1){m+=12;y--}const dim=new Date(y,m,0).getDate();return y+'-'+pad(m)+'-'+pad(Math.min(d,dim))};
 const fmtD=s=>{if(!s)return '—';const[y,m,d]=s.split('-');return (+d)+' '+MON[+m-1]+' '+y};
 const fmtDT=s=>{if(!s)return '';const d=new Date(s);return d.getDate()+' '+MON[d.getMonth()]+' '+d.getFullYear()+', '+pad(d.getHours())+':'+pad(d.getMinutes())};
 const daysBetween=(a,b)=>Math.round((new Date(b)-new Date(a))/864e5);
@@ -255,7 +258,8 @@ function mergeCfg(saved){const c=clone(DEFAULT);if(saved){for(const k in saved)c
     if(!it.parts&&d&&d.parts)it.parts=clone(d.parts);
     if(it.parts&&d&&d.parts)it.parts.forEach(pt=>{const dp=d.parts.find(x=>x.name===pt.name);if(dp){if(pt.ex===undefined)pt.ex=dp.ex;if(pt.req===undefined)pt.req=dp.req}});
     if(it.first===undefined)it.first=['admin','books','ins','struct'].includes(it.id);
-    if(it.dumcOn===undefined)it.dumcOn=it.id==='curr';}
+    if(it.dumcOn===undefined)it.dumcOn=it.id==='curr';
+    if(it.group===undefined)it.group=['aspc','aspx'].includes(it.id)?'asp':'';}
   for(const d of c.discounts){if(d.on===undefined&&/sibling/i.test(d.label||''))d.on='curr'}normTerms(c);return c}
 function normTerms(c){for(const t of c.terms){if(!t.start)t.start=(t.months||[1])[0];if(!t.end)t.end=(t.months||[1]).slice(-1)[0];t.months=range(t.start,Math.max(t.start,t.end))}for(const p of c.programs)if(!p.code)p.code=p.id.toUpperCase()}
 function flash(msg,sticky){const f=$('#flash');f.textContent=msg;f.hidden=false;clearTimeout(flash.t);if(!sticky)flash.t=setTimeout(()=>f.hidden=true,2600)}
@@ -281,9 +285,10 @@ function compute(cfg,c){
     let units=tm,how='';
     if(isFirst){const ms=t.months.filter(m=>m>=em);units=ms.reduce((s,m)=>s+(m===em?w:1),0);
       if(units<tm)how=ms.map(m=>m===em&&w<1?'½ '+MON[m-1]:MON[m-1]).join(' + ')}
-    const frac=units/tm,lines=[];
+    const frac=units/tm,lines=[],usedGrp=new Set();
     for(const it of cfg.items){
       if(!(it.programs||[]).includes(prog.id))continue;
+      if(it.group){if(usedGrp.has(it.group))continue;usedGrp.add(it.group)}
       if(it.opt==='annual'&&c.holiday!=='annual')continue;
       if(it.opt==='weekly'&&c.holiday!=='weekly')continue;
       if(it.freq==='once'&&!isFirst)continue;
@@ -317,25 +322,37 @@ function compute(cfg,c){
     }
     const dep=+prog.deposit||0;
     if(isFirst&&c.deposit==='collect'&&dep)lines.push({label:'Initial payment',amt:dep,kind:'dep',up:true,note:'Non-refundable. Collected with the 1st instalment and offset against '+cfg.terms[last].name+' fees'});
-    if(isFirst&&c.deposit==='paid'&&dep)lines.push({label:'Initial payment (already paid)',amt:0,orig:dep,kind:'dep',struck:true,note:'Received '+(c.depositPaidOn?fmtD(c.depositPaidOn):'earlier')+' · '+rm(dep)});
+    if(isFirst&&c.deposit==='paid'&&dep)lines.push({label:'Initial payment (already paid)',amt:0,orig:dep,kind:'dep',struck:true,note:'Received '+(c.depositPaidOn?fmtD(c.depositPaidOn):'earlier')+(c.depositRef?' · receipt '+c.depositRef:'')+' · '+rm(dep)+' · not included in the instalments'});
     if(ti===last&&c.deposit!=='none'&&dep)lines.push({label:'Less: initial payment offset',amt:-dep,kind:'dep',note:c.deposit==='paid'?'Initial payment received '+(c.depositPaidOn?fmtD(c.depositPaidOn):'earlier'):''});
     {const man=(c.manual||{})[ti]||{};for(const l of lines){const k=lineKey(l),v=man[k];if(!l.struck&&v!==undefined&&v!==''&&v!==null&&!isNaN(+v)&&r2(+v)!==l.amt){l.note=(l.note?l.note+' · ':'')+'Edited manually (calculated '+rm(l.amt)+')';l.amt=r2(+v);l.edited=true}}
      ((c.extra||{})[ti]||[]).forEach((x,xi)=>{if(x&&(x.label||+x.amt))lines.push({label:x.label||'Other charge',amt:r2(+x.amt||0),kind:'fee',note:'Added manually'+(x.note?' · '+x.note:''),extra:true,xi,up:!!x.up})})}
     const total=r2(lines.reduce((s,l)=>s+l.amt,0));const up=r2(lines.filter(l=>l.up&&!l.struck).reduce((s,l)=>s+l.amt,0));
-    res.terms.push({ti,up,maxCfg:+t.maxInst||0,enrol:c.enrolDate||iso(y,1,1),name:t.name,range:MON[t.months[0]-1]+'–'+MON[t.months[tm-1]-1],tm,units,isFirst,prorated:isFirst&&frac<1,how,lines,total,startMonth:isFirst?em:t.invoice});
+    res.terms.push({ti,up,maxCfg:+t.maxInst||0,enrol:c.enrolDate||iso(y,1,1),name:t.name,range:MON[t.months[0]-1]+'–'+MON[t.months[tm-1]-1],tm,units,isFirst,prorated:isFirst&&frac<1,how,lines,total,startMonth:(isFirst&&units<tm)?em:invRel(t)});
     res.year+=total;
   }
   res.year=r2(res.year);
   return res;
 }
+function invRel(t){const inv=+t.invoice||t.months[0];return inv>t.months[t.months.length-1]?inv-12:inv}
 function lineKey(l){return l.item||(l.kind+':'+l.label)}
 function partQty(c,it,k){const pt=it.parts[k],q=+pt.qty||1,ex=(c.student||'New')==='Existing';if(ex&&pt.req)return q;const pq=((c.partsQty||{})[it.id]||{})[k];const def=ex&&pt.ex!==undefined?+pt.ex:q;return Math.max(0,Math.min(q,pq==null?def:+pq))}
+function instComp(t,s,k){
+  const amt=+s.amounts[k]||0,up=k===0?Math.min(t.up||0,amt):0,rest=r2(t.total-(t.up||0)),part=r2(amt-up),ratio=rest?part/rest:0;
+  const grp=l=>l.kind==='dep'?(l.amt<0?'Initial payment offset':'Initial payment'):(cfg.items.find(i=>i.id===l.item)||{}).freq==='once'?'Annual fees':l.label.replace(' – semester fee',' (semester)');
+  const m=new Map(),add=(g,v)=>m.set(g,r2((m.get(g)||0)+v));
+  for(const l of t.lines){if(l.struck||!l.amt)continue;if(l.up){if(k===0)add(grp(l),l.amt)}else add(grp(l),l.amt*ratio)}
+  const rank=g=>g==='Initial payment'?0:g==='Annual fees'?1:g==='Initial payment offset'?9:5;
+  const arr=[...m.entries()].map(([label,v])=>({label,amt:r2(v)})).filter(x=>x.amt).sort((a,b)=>rank(a.label)-rank(b.label));
+  const diff=r2(amt-arr.reduce((x,y)=>x+y.amt,0));if(diff&&arr.length){let b=arr.reduce((a,x)=>Math.abs(x.amt)>Math.abs(a.amt)?x:a,arr[0]);b.amt=r2(b.amt+diff)}
+  return arr;
+}
+const compTxt=a=>a.map(x=>x.label+' '+rm(x.amt)).join(' · ');
 function splitTerm(t,n){if(n<=1)return[r2(t.total)];const up=Math.min(t.up||0,t.total);const a=split(r2(t.total-up),n);a[0]=r2(a[0]+up);return a}
 const maxInst=t=>t.maxCfg?Math.max(1,Math.min(t.maxCfg,Math.ceil(t.units))):Math.max(1,Math.ceil(t.units)-1);
 function split(total,n){if(n<=1)return[r2(total)];const b=Math.floor(total/n);const a=Array(n-1).fill(b);a.push(r2(total-b*(n-1)));return a}
 function makeInst(cfg,t,n,prev){
   n=Math.max(1,Math.min(n,maxInst(t)));
-  const dues=[...Array(n)].map((_,k)=>{if(prev&&prev.dues&&prev.dues[k]&&prev.dues.length===n)return prev.dues[k];const d=iso(cfg.year,t.startMonth+k,cfg.dueDay);return k===0&&t.isFirst&&t.enrol>d?t.enrol:d});
+  const dues=[...Array(n)].map((_,k)=>{if(prev&&prev.dues&&prev.dues[k]&&prev.dues.length===n)return prev.dues[k];const d=iso(cfg.year,t.startMonth+k,cfg.dueDay);return k===0&&t.isFirst&&t.prorated&&t.enrol>d?t.enrol:d});
   const paid=[...Array(n)].map((_,k)=>!!(prev&&prev.paid&&prev.dues&&prev.dues.length===n&&prev.paid[k]));
   return{n,total:t.total,up:t.up||0,dues,amounts:splitTerm(t,n),paid};
 }
@@ -524,13 +541,14 @@ function viewEditor(){
     ${F('calc.program','Programme','select','wide',cfg.programs.map(p=>[p.id,p.name+' · initial '+rm(p.deposit)]))}
     ${F('calc.startHalf','Charge the start month as','select','wide',[['auto','Auto from start date — '+autoTxt],['full','Full month (1st–15th)'],['half','Half month (16th–end of month)']])}
     ${F('calc.holiday','Holiday care','select','',[['none','None'],['annual','Annual (every term)'],['weekly','Weekly (as needed)']])}
-    ${F('calc.deposit','Initial payment','select','',[['collect','Collect with 1st instalment'],['paid','Already paid (offset only)'],['none','Not applicable']])}
-    ${c.deposit==='paid'?F('calc.depositPaidOn','Initial payment paid on','date'):''}
-    ${F('calc.student','Student','select',c.deposit==='paid'?'':'wide',[['New','New student'],['Existing','Existing student']])}
+    ${F('calc.student','Student','select','wide',[['New','New student'],['Existing','Existing student']])}
     ${c.holiday==='weekly'?`<div class="wide fields g-3">${cfg.terms.map((t,i)=>`<label class="f">${esc(t.name)} weeks<input type="number" min="0" max="6" data-b="calc.weeks.${i}" value="${+(c.weeks||[])[i]||0}"></label>`).join('')}</div>`:''}
   </div></div>
+  <div class="panel" style="--dot:var(--navy)"><h3>Initial payment (deposit) · ${rm(progOf(cfg,c.program).deposit)}</h3>
+  <div class="choices-col">${[['collect','Not paid yet','Collected with the 1st instalment, then offset against '+esc(cfg.terms[cfg.terms.length-1].name)+' fees'],['paid','Already paid','Left out of the instalments; still offset against '+esc(cfg.terms[cfg.terms.length-1].name)+' fees'],['none','Not applicable','No initial payment for this child']].map(([v,t,h])=>`<label class="radio"><input type="radio" name="dep" data-b="calc.deposit" value="${v}" ${(c.deposit||'collect')===v?'checked':''}><span><b>${t}</b><small>${h}</small></span></label>`).join('')}</div>
+  ${c.deposit==='paid'?`<div class="fields" style="margin-top:10px">${F('calc.depositPaidOn','Paid on','date')}${F('calc.depositRef','Receipt no.')}</div>`:''}</div>
   <div class="panel" style="--dot:var(--red)"><h3>Items to leave out</h3><p class="small muted" style="margin:-6px 0 10px">Tick anything not needed or waived for this child.</p>
-  ${items.length?items.map(it=>{const ex=(c.excluded||{})[it.id];const pq=(c.partsQty||{})[it.id]||{};return `<div class="lo"><div class="spread"><label class="row" style="gap:10px;font-weight:700"><input type="checkbox" data-ex="${it.id}" ${ex?'checked':''}> ${esc(it.name)}</label>${ex?`<select data-exr="${it.id}" style="width:auto">${['Waived','Not needed'].map(o=>`<option ${ex===o?'selected':''}>${o}</option>`).join('')}</select>`:''}</div>${!ex&&(it.freq==='once'||(c.override||{})[it.id])?`<div class="lo-adj">${adjOpen.has(it.id)||((c.override||{})[it.id]||{}).amt?`<label class="f">Charge instead (RM)<input type="number" step="0.01" data-b="calc.override.${it.id}.amt" value="${esc(((c.override||{})[it.id]||{}).amt??'')}" placeholder="standard amount"></label><label class="f">Reason / items left out<input data-b="calc.override.${it.id}.note" value="${esc(((c.override||{})[it.id]||{}).note??'')}" placeholder="e.g. Prorated – joined in June"></label>`:`<button class="btn small ghost" data-adj="${it.id}" style="color:var(--blue);padding:2px 0">Change amount</button>`}</div>`:''}${it.parts&&it.parts.length&&!ex?`<div class="lo-parts">${it.parts.map((pt,k)=>{const q=+pt.qty||1,ch=partQty(c,it,k),lock=pt.req&&(c.student||'New')==='Existing';return `<div class="lo-p"><span>${lock?`<input type="checkbox" checked disabled aria-label="${esc(pt.name)} required">`:q>1?`<select data-pq="${it.id}|${k}" aria-label="${esc(pt.name)}">${Array.from({length:q+1},(_,n)=>q-n).map(n=>`<option value="${n}" ${n===ch?'selected':''}>${n?n+' '+(pt.unit||'pc')+(n>1?'s':''):'None'}</option>`).join('')}</select>`:`<input type="checkbox" data-pq="${it.id}|${k}" ${ch?'checked':''} aria-label="Include ${esc(pt.name)}">`} ${esc(pt.name)}${lock?' <span class="chip" style="font-size:11px">required for existing students</span>':''}</span><span class="muted">${rm(pt.amt)}${q>1?' each':''}</span></div>`}).join('')}<div class="small muted" style="margin-top:4px">${(c.student||'New')==='Existing'?'Existing student: set to the usual items for returning children. Adjust if needed.':'Untick or reduce anything the child doesn’t need.'}</div></div>`:''}</div>`}).join(''):'<div class="small muted">No fee items for this programme. Add them in Fee settings.</div>'}</div>
+  ${items.length?items.map(it=>{const ex=(c.excluded||{})[it.id];const pq=(c.partsQty||{})[it.id]||{};return `<div class="lo"><div class="spread"><label class="row" style="gap:10px;font-weight:700"><input type="checkbox" data-ex="${it.id}" ${ex?'checked':''}> ${esc(it.name)}</label>${ex?`<select data-exr="${it.id}" style="width:auto">${['Waived','Not needed'].map(o=>`<option ${ex===o?'selected':''}>${o}</option>`).join('')}</select>`:''}</div>${!ex&&(it.freq==='once'||(c.override||{})[it.id])?`<div class="lo-adj">${adjOpen.has(it.id)||((c.override||{})[it.id]||{}).amt?`<label class="f">Charge instead (RM)<input type="number" step="0.01" data-b="calc.override.${it.id}.amt" value="${esc(((c.override||{})[it.id]||{}).amt??'')}" placeholder="standard amount"></label><label class="f">Reason / items left out<input data-b="calc.override.${it.id}.note" value="${esc(((c.override||{})[it.id]||{}).note??'')}" placeholder="e.g. Prorated – joined in June"></label>`:`<button class="btn small ghost" data-adj="${it.id}" style="color:var(--blue);padding:2px 0">Change amount</button>`}</div>`:''}${it.parts&&it.parts.length&&!ex?`<div class="lo-parts">${it.parts.map((pt,k)=>{const q=+pt.qty||1,ch=partQty(c,it,k),lock=pt.req&&(c.student||'New')==='Existing';return `<div class="lo-p ${ch<q?'off':''}"><span>${lock?`<input type="checkbox" disabled aria-label="${esc(pt.name)} required">`:q>1?`<select data-pqo="${it.id}|${k}|${q}" aria-label="Leave out ${esc(pt.name)}">${Array.from({length:q+1},(_,n)=>n).map(n=>`<option value="${n}" ${n===q-ch?'selected':''}>${n?'Leave out '+n+' '+(pt.unit||'pc')+(n>1?'s':''):'Keep all '+q}</option>`).join('')}</select>`:`<input type="checkbox" data-pqx="${it.id}|${k}" ${ch?'':'checked'} aria-label="Leave out ${esc(pt.name)}">`} <em class="pn">${esc(pt.name)}</em>${lock?' <span class="chip" style="font-size:11px">required for existing students</span>':''}</span><span class="muted">${rm(pt.amt)}${q>1?' each':''}</span></div>`}).join('')}<div class="small muted" style="margin-top:4px">${(c.student||'New')==='Existing'?'Existing student: ticked items are left out as usual for returning children. Untick to charge them.':'Tick anything the child doesn’t need.'}</div></div>`:''}</div>`}).join(''):'<div class="small muted">No fee items for this programme. Add them in Fee settings.</div>'}</div>
   <div class="panel" id="discPanel" style="--dot:var(--blue)"><h3>Discounts <span class="chip red" style="text-transform:none;letter-spacing:0">Required</span></h3>${!discOK(draft)?`<div class="note-box" style="margin:-4px 0 12px;background:var(--t2);color:var(--t2-ink)">Choose the discount for this child, or tick <b>No discount</b>, before the breakdown is used.</div>`:''}
   ${(c.discounts||[]).map((d,i)=>`<div class="fields g-disc">
     <label class="f">What it’s for<input data-b="calc.discounts.${i}.label" value="${esc(d.label)}"></label>
@@ -565,16 +583,16 @@ function renderResult(){
     ${ed?`<div class="ln" style="gap:6px"><input data-xnew-label="${t.ti}" placeholder="Add a charge or credit (e.g. Late registration)" style="flex:1;min-width:0"><input type="number" step="0.01" data-xnew-amt="${t.ti}" placeholder="RM" style="width:110px;text-align:right"><button class="btn small" data-xadd="${t.ti}">Add</button></div><div class="small muted" style="padding:4px 0 6px">Type a new amount to replace the calculated one; leave blank to use the calculation. Use a minus amount for a credit. Edits are recorded in the history with your name.</div>`:''}
     <div class="ln tot"><span>Term total</span><span>${rm(t.total)}</span></div></div>
     <div class="inst"><div class="spread" style="margin-bottom:6px"><b class="small">Instalments</b><label class="row small muted" style="gap:6px">Pay in <select data-n="${t.ti}" style="width:auto">${[...Array(mx)].map((_,i)=>`<option value="${i+1}" ${s.n===i+1?'selected':''}>${i?(i+1)+' instalments':'1 payment'}</option>`).join('')}</select> max ${mx}</label></div>
-    <table><tbody>${[...Array(s.n)].map((_,k)=>`<tr><td class="small muted" style="width:28px">${k+1}.</td><td><input type="date" data-due="${t.ti}|${k}" value="${s.dues[k]}" aria-label="Due date ${k+1}"></td><td><input type="number" step="0.01" data-amt="${t.ti}|${k}" value="${s.amounts[k]}" aria-label="Amount ${k+1}" style="text-align:right"></td>${isPlan?`<td style="white-space:nowrap"><label class="row small" style="gap:5px;font-weight:700"><input type="checkbox" data-paid="${t.ti}|${k}" ${(s.paid||[])[k]?'checked':''}>Paid</label></td>`:''}</tr>`).join('')}</tbody></table>
+    <table><tbody>${[...Array(s.n)].map((_,k)=>`<tr><td class="small muted" style="width:28px">${k+1}.</td><td><input type="date" data-due="${t.ti}|${k}" value="${s.dues[k]}" aria-label="Due date ${k+1}"></td><td><input type="number" step="0.01" data-amt="${t.ti}|${k}" value="${s.amounts[k]}" aria-label="Amount ${k+1}" style="text-align:right"></td>${isPlan?`<td style="white-space:nowrap"><label class="row small" style="gap:5px;font-weight:700"><input type="checkbox" data-paid="${t.ti}|${k}" ${(s.paid||[])[k]?'checked':''}>Paid</label></td>`:''}</tr><tr class="ibr"><td></td><td colspan="${isPlan?3:2}"><div class="ib">${instComp(t,s,k).map(x=>`<span>${esc(x.label)} <b>${rm(x.amt)}</b></span>`).join('')}</div></td></tr>`).join('')}</tbody></table>
     ${t.up&&s.n>1?`<div class="small muted" style="margin-top:6px">1st instalment includes ${rm(t.up)} collected up front (${t.lines.filter(l=>l.up&&!l.struck&&l.amt).map(l=>l.label.replace(' – semester fee','')).join(', ')}).</div>`:''}
     ${sum!==t.total?`<div class="note-box" style="margin-top:8px">These add up to ${rm(sum)} but the term total is ${rm(t.total)}. <button class="btn small" data-resplit="${t.ti}">Split evenly</button></div>`:''}</div></div>`}).join('');
   el.innerHTML=head+terms+`<p class="small muted">${esc(fillT(cfg.remarks.breakdown))} Only the first term is prorated. Later terms are charged in full, and ${esc(cfg.terms[cfg.terms.length-1].name)} is the full fee less the initial payment.</p>`;
 }
 
 /* ---------- printable documents ---------- */
-const DOC_CSS=`.doc{font:10.5pt/1.5 Arial,Helvetica,sans-serif;color:#1b2a3d;background:#fff;width:100%;max-width:700px;margin:0;padding:2px 0}
+const DOC_CSS=`.doc{font:10.5pt/1.5 Arial,Helvetica,sans-serif;color:#1b2a3d;background:#fff;width:100%;max-width:672px;margin:0;padding:2px 2px}
 .doc *{box-sizing:border-box}.doc h1{font-size:15pt;margin:0;color:#1a3b5e}.doc h2{font-size:11pt;margin:18px 0 6px;color:#d23f37;page-break-after:avoid}
-.doc table{border-collapse:collapse;width:100%;font-size:9.5pt;border:1.4px solid #44546a}.doc td,.doc th{border:1px solid #8c97a7;padding:5px 8px;text-align:left;vertical-align:top}.doc th{background:#e6ecf4;color:#1b2a3d}
+.doc table{border-collapse:collapse;width:100%;font-size:9.5pt;border:1.4px solid #44546a;table-layout:fixed}.doc td,.doc th{overflow-wrap:anywhere}.doc td,.doc th{border:1px solid #8c97a7;padding:5px 8px;text-align:left;vertical-align:top}.doc th{background:#e6ecf4;color:#1b2a3d;white-space:normal;letter-spacing:.02em;font-size:8.3pt;text-transform:uppercase}
 .doc tr{page-break-inside:avoid}.doc p{page-break-inside:avoid}.doc .r{text-align:right}.doc .hd{display:flex;gap:14px;align-items:center;border-bottom:3px solid #1a3b5e;padding-bottom:10px;margin-bottom:14px}
 .doc .hd img{width:64px;height:64px}.doc .hd small{display:block;font-size:8pt;color:#555}.doc .title{font-size:13pt;font-weight:bold;margin:4px 0 8px;color:#1b2a3d}
 .doc .bx{display:inline-block;width:11px;height:11px;border:1px solid #333;margin:0 5px 0 0;vertical-align:-1px}.doc .bx.on{background:#1a3b5e}.doc .opt{display:inline-block;margin-right:14px;white-space:nowrap}
@@ -586,7 +604,7 @@ const bx=(on,l)=>`<span class="opt"><span class="bx ${on?'on':''}"></span>${l}</
 function breakdownBlock(p){
   const res=compute(cfg,p.calc);syncInst(cfg,p,res);const all=allInst(p);
   return res.terms.map(t=>`<h2>${esc(t.name)} (${t.range})${t.prorated?' · prorated '+fmtU(t.units)+' of '+t.tm:''}</h2><table>${t.lines.map(l=>`<tr><td>${esc(l.label)}${l.note?`<div class="tag">${esc(l.note)}</div>`:''}</td><td class="r" style="width:130px">${l.struck?'—':rm(l.amt)}</td></tr>`).join('')}<tr><th>Term total</th><th class="r">${rm(t.total)}</th></tr></table>`).join('')
-  +`<h2>Payment schedule</h2><table><tr><th style="width:40px">No.</th><th>Term</th><th>Due date</th><th class="r">Amount</th></tr>${all.map((i,n)=>`<tr><td>${n+1}</td><td>${esc(cfg.terms[i.ti].name)} (${i.k+1} of ${i.n})</td><td>${fmtD(i.due)}</td><td class="r">${rm(i.amt)}</td></tr>`).join('')}<tr><th colspan="3">Total payable for ${cfg.year}</th><th class="r">${rm(res.year)}</th></tr></table>`;
+  +`<h2>Payment schedule</h2><table><tr><th style="width:34px">No.</th><th style="width:96px">Due date</th><th style="width:92px">Term</th><th>What it covers</th><th class="r" style="width:96px">Amount</th></tr>${all.map((i,n)=>{const t=res.terms.find(x=>x.ti===i.ti);return `<tr><td>${n+1}</td><td>${fmtD(i.due)}</td><td>${esc(cfg.terms[i.ti].name)} (${i.k+1}/${i.n})</td><td class="tag" style="font-size:8.5pt;color:#333">${esc(compTxt(instComp(t,p.inst[i.ti],i.k)))}</td><td class="r">${rm(i.amt)}</td></tr>`}).join('')}<tr><th colspan="4">Total payable for ${cfg.year}</th><th class="r">${rm(res.year)}</th></tr></table>`;
 }
 function agreementDoc(p,copy){
   const s=cfg.school,blank=!p,last=cfg.terms[cfg.terms.length-1].name;
@@ -626,8 +644,10 @@ function statementDoc(p){
   <h2>Instalments</h2><table><tr><th style="width:36px">No.</th><th>Term</th><th>Due date</th><th class="r">Amount</th><th>Status</th></tr>${all.map((i,n)=>`<tr><td>${n+1}</td><td>${esc(cfg.terms[i.ti].name)} (${i.k+1} of ${i.n})</td><td>${fmtD(i.due)}</td><td class="r">${rm(i.amt)}</td><td>${stTag(i)}</td></tr>`).join('')}</table>
   <p class="tag" style="margin-top:12px">As at ${fmtD(todayISO())}. ${esc(fillT(cfg.remarks.statement))}</p></div>`;
 }
+function repYM(){return repMonth?viewYear+'-'+pad(repMonth):(viewYear-1)+'-12'}
+function repLabel(){return repMonth?MON[repMonth-1]+' '+viewYear:'Dec '+(viewYear-1)}
 function monthlyDoc(ps){
-  const today=todayISO(),ym=viewYear+'-'+pad(repMonth),mStart=ym+'-01',mEnd=iso(viewYear,repMonth,31),label=MON[repMonth-1]+' '+viewYear;
+  const today=todayISO(),ym=repYM(),mStart=ym+'-01',mEnd=iso(viewYear,repMonth,31),label=repLabel();
   const on=ps.filter(p=>{const a=allInst(p);return a.length&&a[0].due<=mEnd&&(a[a.length-1].due>=mStart||a.some(i=>!i.paid))});
   const rows=on.map(p=>{const a=allInst(p);const out=a.filter(i=>!i.paid&&i.due<=mEnd);return{p,a,out,outAmt:r2(out.reduce((x,i)=>x+i.amt,0)),dueM:a.filter(i=>i.due.startsWith(ym)),toCome:r2(a.filter(i=>i.due>mEnd).reduce((x,i)=>x+i.amt,0)),paid:a.filter(i=>i.paid)}});
   const allOut=rows.flatMap(r=>r.out.map(i=>({...i,p:r.p}))).sort((a,b)=>a.due<b.due?-1:1);
@@ -635,7 +655,7 @@ function monthlyDoc(ps){
   const T=(l,v)=>`<td style="text-align:center;padding:8px"><div style="font-size:15pt;font-weight:bold;color:#1a3b5e">${v}</div><div class="tag">${l}</div></td>`;
   const sumOut=r2(allOut.reduce((x,i)=>x+i.amt,0)),sumDue=r2(dueM.reduce((x,i)=>x+i.amt,0)),sumDuePaid=r2(dueM.filter(i=>i.paid).reduce((x,i)=>x+i.amt,0)),sumCome=r2(rows.reduce((x,r)=>x+r.toCome,0));
   return `<div class="doc">${docHead('Monthly Instalment Report · '+label)}<p class="tag" style="font-size:9pt">Covers children on an active instalment plan in ${label}. Outstanding means due on or before ${fmtD(mEnd)} and not marked paid. Prepared ${fmtD(today)}.</p>
-  <table style="margin:6px 0 4px"><tr>${T('Children on instalment',rows.length)}${T('Outstanding as at '+fmtD(mEnd),rm(sumOut))}${T('Due in '+MON[repMonth-1],rm(sumDue))}${T('Of which paid',rm(sumDuePaid))}${T('Still to come after '+MON[repMonth-1],rm(sumCome))}</tr></table>
+  <table style="margin:6px 0 4px"><tr>${T('Children on instalment',rows.length)}${T('Outstanding as at '+fmtD(mEnd),rm(sumOut))}${T('Due in '+repLabel().split(' ')[0],rm(sumDue))}${T('Of which paid',rm(sumDuePaid))}${T('Still to come after '+repLabel().split(' ')[0],rm(sumCome))}</tr></table>
   <h2>Children currently on instalment</h2><table><tr><th>Child</th><th>Parent / mobile</th><th>Programme</th><th>Plan period</th><th class="r">Paid</th><th class="r">Outstanding</th><th>Next due</th></tr>${rows.map(r=>{const nx=r.a.find(i=>!i.paid);return `<tr><td><b>${esc(r.p.child.name)}</b><div class="tag">${esc(r.p.calc.age)}</div></td><td>${esc(r.p.parent.name)}<div class="tag">${esc(r.p.parent.phone)}</div></td><td>${esc(progOf(cfg,r.p.calc.program).name)}</td><td>${fmtD(r.a[0].due)} – ${fmtD(r.a[r.a.length-1].due)}</td><td class="r">${r.paid.length} / ${r.a.length}</td><td class="r">${r.outAmt?'<b style="color:#d23f37">'+rm(r.outAmt)+'</b>':rm(0)}</td><td>${nx?fmtD(nx.due)+'<div class="tag">'+rm(nx.amt)+'</div>':'All paid'}</td></tr>`}).join('')||'<tr><td colspan="7">No children on instalment this month.</td></tr>'}</table>
   <h2>Outstanding as at ${fmtD(mEnd)}</h2><table><tr><th>Due date</th><th>Child</th><th>Parent / mobile</th><th>Instalment</th><th class="r">Amount</th><th class="r">Days overdue</th></tr>${allOut.map(i=>`<tr><td>${fmtD(i.due)}</td><td><b>${esc(i.p.child.name)}</b></td><td>${esc(i.p.parent.name)}<div class="tag">${esc(i.p.parent.phone)}</div></td><td>${esc(cfg.terms[i.ti].name)} (${i.k+1}/${i.n})</td><td class="r">${rm(i.amt)}</td><td class="r">${Math.max(0,daysBetween(i.due,mEnd<today?mEnd:today))}</td></tr>`).join('')||'<tr><td colspan="6">Nothing outstanding.</td></tr>'}${allOut.length?`<tr><th colspan="4">Total outstanding</th><th class="r">${rm(sumOut)}</th><th></th></tr>`:''}</table>
   <h2>Due in ${label}</h2><table><tr><th>Due date</th><th>Child</th><th>Instalment</th><th class="r">Amount</th><th>Status</th></tr>${dueM.map(i=>`<tr><td>${fmtD(i.due)}</td><td><b>${esc(i.p.child.name)}</b></td><td>${esc(cfg.terms[i.ti].name)} (${i.k+1}/${i.n})</td><td class="r">${rm(i.amt)}</td><td>${stTag(i)}</td></tr>`).join('')||'<tr><td colspan="5">No instalments due this month.</td></tr>'}</table></div>`;
@@ -671,7 +691,7 @@ function reportDoc(kind){
   }
   const items=ps.flatMap(p=>allInst(p).map(i=>({...i,p})));
   let list,title,sub;
-  if(kind==='month'){const ym=viewYear+'-'+pad(repMonth);list=items.filter(i=>i.due.startsWith(ym));title='Instalments Due · '+MON[repMonth-1]+' '+viewYear;sub='All instalments with a due date in '+MON[repMonth-1]+' '+viewYear}
+  if(kind==='month'){const ym=repYM();list=items.filter(i=>i.due.startsWith(ym));title='Instalments Due · '+repLabel();sub='All instalments with a due date in '+repLabel()}
   else{list=items.filter(i=>!i.paid&&i.due<today);title='Unpaid & Overdue Instalments · '+viewYear;sub='Instalments past their due date and not marked paid, as at '+fmtD(today)}
   list.sort((a,b)=>a.due<b.due?-1:1);
   return `<div class="doc">${docHead(title)}<p class="tag" style="font-size:9pt">${sub}</p>${sumTable(sums(list))}
@@ -697,12 +717,12 @@ async function saveFile(filename,data){
   try{const u=URL.createObjectURL(data);const a=document.createElement('a');a.href=u;a.download=filename;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),4000);flash('Downloaded '+filename);return true}catch(e){flash('Could not download the file');return false}
 }
 async function makePDF(kind,p,btn){return pdfFrom(docFor(kind,p),docName(kind,p),btn)}
-async function makeReport(kind,btn){const names={monthly:'TJC Monthly Instalment Report '+MON[repMonth-1]+' '+viewYear,year:'TJC Instalment Report '+viewYear,month:'TJC Instalments Due '+MON[repMonth-1]+' '+viewYear,overdue:'TJC Unpaid Instalments '+viewYear+' as at '+todayISO()};return pdfFrom(reportDoc(kind),names[kind],btn)}
+async function makeReport(kind,btn){const names={monthly:'TJC Monthly Instalment Report '+repLabel(),year:'TJC Instalment Report '+viewYear,month:'TJC Instalments Due '+repLabel(),overdue:'TJC Unpaid Instalments '+viewYear+' as at '+todayISO()};return pdfFrom(reportDoc(kind),names[kind],btn)}
 async function pdfFrom(html,name,btn){
   if(!window.html2pdf){flash('The PDF maker didn’t load. Check your connection and reload.');return}
   if(btn){btn.disabled=true;var old=btn.textContent;btn.textContent='Making PDF…'}
   const sy=window.scrollY,sx=window.scrollX;window.scrollTo(0,0);
-  const holder=document.createElement('div');holder.style.cssText='position:absolute;left:0;top:0;width:700px;background:#fff;z-index:-1';
+  const holder=document.createElement('div');holder.style.cssText='position:absolute;left:0;top:0;width:680px;background:#fff;z-index:-1';
   holder.innerHTML=`<style>${DOC_CSS}</style>`+html;document.body.appendChild(holder);
   try{
     const blob=await html2pdf().set({margin:[12,12,14,12],image:{type:'jpeg',quality:.96},html2canvas:{scale:2,backgroundColor:'#ffffff',useCORS:true,scrollX:0,scrollY:0},jsPDF:{unit:'mm',format:'a4',orientation:'portrait'},pagebreak:{mode:['css','legacy'],avoid:['tr','.sig','h2']}}).from(holder.querySelector('.doc')).outputPdf('blob');
@@ -717,8 +737,8 @@ function viewReports(){
   return `${copyBanner()}<h1>Instalment Reports · ${viewYear}</h1><p class="sub">Paid, unpaid and upcoming instalments for children on an active plan. Paid follows the ticks on each record.</p>
   <div class="tiles"><div class="tile" style="background:var(--ok-soft);border-color:transparent"><div class="n" style="color:var(--ok);font-size:22px">${rm(tot.paid)}</div><div class="l">Paid</div></div><div class="tile c2"><div class="n" style="font-size:22px">${rm(tot.over)}</div><div class="l">Unpaid · overdue</div></div><div class="tile c3"><div class="n" style="font-size:22px">${rm(tot.soon)}</div><div class="l">Due in 30 days</div></div><div class="tile c1"><div class="n" style="font-size:22px">${rm(tot.up)}</div><div class="l">Upcoming</div></div></div>
   <div class="rep-grid">
-  <div class="panel rep" style="--dot:var(--red)"><h3>Monthly report</h3><p class="small muted">Who is on instalment, what is outstanding at month end, and what falls due that month.</p><div class="row"><select id="repMonth2" style="width:auto">${MON.map((m,i)=>`<option value="${i+1}" ${repMonth===i+1?'selected':''}>${m} ${viewYear}</option>`).join('')}</select><button class="btn primary" data-rep="monthly">Download PDF</button></div></div>
-  <div class="panel rep" style="--dot:var(--sun)"><h3>Due in a month</h3><p class="small muted">Every instalment due in the chosen month, with its status.</p><div class="row"><select id="repMonth" style="width:auto">${MON.map((m,i)=>`<option value="${i+1}" ${repMonth===i+1?'selected':''}>${m} ${viewYear}</option>`).join('')}</select><button class="btn" data-rep="month">Download PDF</button></div></div>
+  <div class="panel rep" style="--dot:var(--red)"><h3>Monthly report</h3><p class="small muted">Who is on instalment, what is outstanding at month end, and what falls due that month.</p><div class="row"><select id="repMonth2" style="width:auto"><option value="0" ${repMonth===0?'selected':''}>Dec ${viewYear-1}</option>${MON.map((m,i)=>`<option value="${i+1}" ${repMonth===i+1?'selected':''}>${m} ${viewYear}</option>`).join('')}</select><button class="btn primary" data-rep="monthly">Download PDF</button></div></div>
+  <div class="panel rep" style="--dot:var(--sun)"><h3>Due in a month</h3><p class="small muted">Every instalment due in the chosen month, with its status.</p><div class="row"><select id="repMonth" style="width:auto"><option value="0" ${repMonth===0?'selected':''}>Dec ${viewYear-1}</option>${MON.map((m,i)=>`<option value="${i+1}" ${repMonth===i+1?'selected':''}>${m} ${viewYear}</option>`).join('')}</select><button class="btn" data-rep="month">Download PDF</button></div></div>
   <div class="panel rep" style="--dot:var(--red)"><h3>Unpaid &amp; overdue</h3><p class="small muted">For follow-up calls: who, how much, and the mobile number.</p><div class="row"><button class="btn" data-rep="overdue">Download PDF</button></div></div>
   <div class="panel rep" style="--dot:var(--navy)"><h3>Year report</h3><p class="small muted">Summary, a line per child, and every instalment with its status.</p><div class="row"><button class="btn" data-rep="year">Download PDF</button></div></div>
   <div class="panel rep" style="--dot:var(--ok)"><h3>Excel workbook</h3><p class="small muted">Records, instalments, totals by month and the full change history for ${viewYear}.</p><div class="row"><button class="btn" data-xl>Download Excel</button></div></div>
@@ -780,7 +800,7 @@ function viewSettings(){
   </div><p class="small muted" style="margin:10px 0 0">Late fee and cancellation days are used in the agreement wording.</p></div>
 
   <div class="panel" id="s-terms" style="--dot:var(--sun)"><h3>Terms &amp; coverage</h3>
-  ${c.terms.map((t,i)=>`<div class="fields g-term"><label class="f">Name<input data-c="terms.${i}.name" value="${esc(t.name)}"></label><label class="f">From${sel('terms.'+i+'.start',t.start,monOpts)}</label><label class="f">To${sel('terms.'+i+'.end',t.end,monOpts)}</label><label class="f">Invoice month${sel('terms.'+i+'.invoice',t.invoice,monOpts)}</label><label class="f">Max instalments${sel('terms.'+i+'.maxInst',t.maxInst||'',[['','Auto ('+Math.max(1,t.months.length-1)+')'],...[1,2,3,4,5,6].map(n=>[n,String(n)])])}</label></div>`).join('')}
+  ${c.terms.map((t,i)=>`<div class="fields g-term"><label class="f">Name<input data-c="terms.${i}.name" value="${esc(t.name)}"></label><label class="f">From${sel('terms.'+i+'.start',t.start,monOpts)}</label><label class="f">To${sel('terms.'+i+'.end',t.end,monOpts)}</label><label class="f">Invoice month <span style="font-weight:600">(Dec = year before)</span>${sel('terms.'+i+'.invoice',t.invoice,monOpts)}</label><label class="f">Max instalments${sel('terms.'+i+'.maxInst',t.maxInst||'',[['','Auto ('+Math.max(1,t.months.length-1)+')'],...[1,2,3,4,5,6].map(n=>[n,String(n)])])}</label></div>`).join('')}
   ${coverage(c)}
   <p class="small muted" style="margin:6px 0 0">Auto allows one instalment fewer than the months in the term (4 months → 3, 3 months → 2). The last term is where the initial payment is offset.</p></div>
 
@@ -796,7 +816,7 @@ function viewSettings(){
       <label class="f" style="flex:1 1 190px">Shown when${sel('items.'+ii+'.opt',it.opt||'',[['','Always'],['annual','Annual holiday care chosen'],['weekly','Weekly holiday care chosen']])}</label>
       <button class="btn ghost danger" data-delitem="${ii}" aria-label="Remove ${esc(it.name)}" style="align-self:flex-end">✕</button></div>
     <div class="fi-mid"><div><div class="fi-lbl">Programmes</div><div class="row" style="gap:12px">${progCk(it,ii)}</div></div>
-      <div><div class="fi-lbl">Options</div><div class="row" style="gap:14px"><label class="row small" style="gap:5px;font-weight:700"><input type="checkbox" data-cb="items.${ii}.prorate" ${it.prorate?'checked':''}>Prorate</label><label class="row small" style="gap:5px;font-weight:700"><input type="checkbox" data-cb="items.${ii}.disc" ${it.disc?'checked':''}>Discount applies</label><label class="row small" style="gap:5px;font-weight:700"><input type="checkbox" data-cb="items.${ii}.first" ${it.first?'checked':''}>Collect with 1st instalment of the term</label>${it.freq==='term'?`<label class="row small" style="gap:5px;font-weight:700"><input type="checkbox" data-cbr="items.${ii}.dumcOn" ${it.dumcOn?'checked':''}>DUMC split</label>`:''}</div></div></div>
+      <div><div class="fi-lbl">Options</div><div class="row" style="gap:14px"><label class="row small" style="gap:5px;font-weight:700"><input type="checkbox" data-cb="items.${ii}.prorate" ${it.prorate?'checked':''}>Prorate</label><label class="row small" style="gap:5px;font-weight:700"><input type="checkbox" data-cb="items.${ii}.disc" ${it.disc?'checked':''}>Discount applies</label><label class="row small" style="gap:5px;font-weight:700"><input type="checkbox" data-cb="items.${ii}.first" ${it.first?'checked':''}>Collect with 1st instalment of the term</label><label class="row small" style="gap:5px;font-weight:700" title="Items with the same group: a programme can only use one of them">Group<input data-c="items.${ii}.group" value="${esc(it.group||'')}" style="width:70px;padding:3px 8px" placeholder="none"></label>${it.freq==='term'?`<label class="row small" style="gap:5px;font-weight:700"><input type="checkbox" data-cbr="items.${ii}.dumcOn" ${it.dumcOn?'checked':''}>DUMC split</label>`:''}</div></div></div>
     <div class="fi-ages">${c.ages.map(a=>`<label class="f">${esc(a)} (RM)<input type="number" step="0.01" data-c="items.${ii}.amt.${a}" value="${esc((it.amt||{})[a]??'')}" style="text-align:right"></label>`).join('')}</div>
     ${it.dumcOn?`<div class="fi-parts"><div class="fi-lbl">DUMC Staff · semester fee per term (parent pays; the rest is tuition paid by DUMC)</div><div class="fi-ages">${c.ages.map(a=>`<label class="f">${esc(a)} (RM)<input type="number" step="0.01" data-c="items.${ii}.sem.${a}" value="${esc((it.sem||{})[a]??'')}" style="text-align:right"></label>`).join('')}</div></div>`:''}
     ${it.parts&&it.parts.length?`<div class="fi-parts"><div class="fi-lbl">Breakdown · “Existing” is the usual quantity for returning students · total ${rm(it.parts.reduce((x,pt)=>x+(+pt.amt||0)*(+pt.qty||1),0))}</div>${it.parts.map((pt,k)=>`<div class="fi-part"><input data-c="items.${ii}.parts.${k}.name" value="${esc(pt.name)}" aria-label="Line name"><label class="row small" style="gap:4px;white-space:nowrap">RM<input type="number" step="0.01" data-c="items.${ii}.parts.${k}.amt" value="${esc(pt.amt)}" style="width:90px;text-align:right" aria-label="Amount each"></label><label class="row small" style="gap:4px;white-space:nowrap">×<input type="number" min="1" data-c="items.${ii}.parts.${k}.qty" value="${esc(pt.qty||1)}" style="width:60px" aria-label="Quantity"></label><label class="row small" style="gap:4px;white-space:nowrap" title="Default quantity for existing students">Existing<input type="number" min="0" data-c="items.${ii}.parts.${k}.ex" value="${esc(pt.ex??pt.qty??1)}" style="width:60px" aria-label="Existing student default"></label><label class="row small" style="gap:4px;white-space:nowrap"><input type="checkbox" data-cb="items.${ii}.parts.${k}.req" ${pt.req?'checked':''}>Required (existing)</label><button class="btn ghost danger small" data-delpart="${ii}|${k}" aria-label="Remove line">✕</button></div>`).join('')}</div>`:''}
@@ -995,6 +1015,7 @@ document.addEventListener('change',e=>{
   if(d.ex){draft.calc.excluded=draft.calc.excluded||{};if(el.checked)draft.calc.excluded[d.ex]='Waived';else delete draft.calc.excluded[d.ex];rerenderEditor();return}
   if(d.man){const i=d.man.indexOf('|'),ti=d.man.slice(0,i),k=d.man.slice(i+1);const m=draft.calc.manual=draft.calc.manual||{};m[ti]=m[ti]||{};if(el.value==='')delete m[ti][k];else m[ti][k]=r2(el.value);renderResult();return}
   if(d.xamt){const[ti,xi]=d.xamt.split('|');draft.calc.extra[ti][xi].amt=r2(el.value);renderResult();return}
+  if(d.pqx||d.pqo){const[iid,k,q]=(d.pqx||d.pqo).split('|');draft.calc.partsQty=draft.calc.partsQty||{};const m=draft.calc.partsQty[iid]=draft.calc.partsQty[iid]||{};m[k]=d.pqx?(el.checked?0:1):(+q-(+el.value));rerenderEditor();return}
   if(d.pq){const[iid,k]=d.pq.split('|');draft.calc.partsQty=draft.calc.partsQty||{};const m=draft.calc.partsQty[iid]=draft.calc.partsQty[iid]||{};m[k]=el.type==='checkbox'?(el.checked?1:0):+el.value;renderResult();return}
   if(d.exr){draft.calc.excluded[d.exr]=el.value;renderResult();return}
   if(d.n){const res=compute(cfg,draft.calc),tt=res.terms.find(x=>String(x.ti)===d.n);draft.inst[d.n]=makeInst(cfg,tt,+el.value,draft.inst[d.n]);renderResult();return}
@@ -1012,7 +1033,7 @@ document.addEventListener('change',e=>{
   if(d.age!==undefined){const i=+d.age,old=cfgDraft.ages[i],nw=el.value.trim();if(!nw||cfgDraft.ages.includes(nw)){el.value=old;return}cfgDraft.ages[i]=nw;for(const it of cfgDraft.items){it.amt=it.amt||{};if(old in it.amt){it.amt[nw]=it.amt[old];delete it.amt[old]}}rerenderSettings();return}
   if(d.cb){set(cfgDraft,d.cb,el.checked);return}
   if(d.cbr){set(cfgDraft,d.cbr,el.checked);rerenderSettings();return}
-  if(d.ip){const[ii,pid]=d.ip.split('|'),it=cfgDraft.items[+ii];it.programs=it.programs||[];if(el.checked){if(!it.programs.includes(pid))it.programs.push(pid)}else it.programs=it.programs.filter(x=>x!==pid);return}
+  if(d.ip){const[ii,pid]=d.ip.split('|'),it=cfgDraft.items[+ii];it.programs=it.programs||[];if(el.checked){if(!it.programs.includes(pid))it.programs.push(pid);if(it.group){let n=0;cfgDraft.items.forEach((o,oi)=>{if(oi!==+ii&&o.group===it.group&&(o.programs||[]).includes(pid)){o.programs=o.programs.filter(x=>x!==pid);n++}});if(n){rerenderSettings();flash('Unticked '+pid.toUpperCase()+' on the other '+it.group.toUpperCase()+' item – only one can apply')}}}else it.programs=it.programs.filter(x=>x!==pid);return}
 });
 boot();
 </script>
