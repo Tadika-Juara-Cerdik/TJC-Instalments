@@ -95,13 +95,12 @@ textarea{min-height:80px;resize:vertical}
     </div>
   </section>
 
-  <section class="card" style="--c:var(--navy)"><h2><i>D</i>Instalment Request</h2>
+  <section class="card" style="--c:var(--navy)"><h2><i>D</i>Instalment Request</h2><p class="small muted" style="margin:-8px 0 12px;font-weight:700">For curriculum fees only.</p>
     <div class="choices">
-      <label class="choice"><input type="radio" name="arr" value="Monthly within each term" checked><span>Monthly within each term<small>Terms 1 &amp; 2: up to 3 instalments · Term 3: up to 2 instalments</small></span></label>
-      <label class="choice"><input type="radio" name="arr" value="other"><span>Something else<small>Tell us what would work for you</small></span></label>
+      <label class="choice"><input type="checkbox" id="arr2" checked><span>2 payments per term</span></label>
     </div>
     <div class="fields" style="margin-top:14px">
-      <label class="f wide" id="arrOtherWrap" hidden>Your preferred arrangement<input id="arrOther"></label>
+      <label class="f wide">Other arrangement (optional)<textarea id="arrOther" placeholder="e.g. monthly, 3 times a term"></textarea></label>
       <label class="f wide">Reason for request<textarea id="reason"></textarea></label>
           </div>
   </section>
@@ -143,10 +142,10 @@ const today=()=>{const d=new Date();return d.getFullYear()+'-'+pad(d.getMonth()+
 document.querySelectorAll('.yr,#yrTitle').forEach(e=>e.textContent=FORM.year);
 $('#ages').innerHTML=FORM.ages.map(a=>`<label class="pill"><input type="radio" name="age" value="${esc(a)}">${esc(a)}</label>`).join('');
 $('#progs').innerHTML=FORM.programs.map(([n,d],i)=>`<label class="choice"><input type="radio" name="prog" value="${i}"><span>${esc(n)}<small>Initial payment ${rm(d)}, offset against Term 3 fees</small></span></label>`).join('');
-$('#declText').textContent=`I request to pay my child’s ${FORM.year} school fees by instalment. I understand that this request is subject to the Principal’s approval, that the initial payment and Annual Fees are payable on enrolment, and that the School’s ${FORM.year} Fee Structure terms, including late payment charges, continue to apply.`;
+$('#declText').textContent=`I would like to request to pay my child’s ${FORM.year} curriculum fees by instalment. I understand that this request is subject to the Principal’s approval.`;
 $('#sDate').value=today();
 $('#hc').addEventListener('change',e=>$('#wkWrap').hidden=e.target.value!=='weekly');
-document.addEventListener('change',e=>{if(e.target.name==='arr')$('#arrOtherWrap').hidden=e.target.value!=='other';if(e.target.classList)e.target.classList.remove('bad')});
+document.addEventListener('change',e=>{if(e.target.classList)e.target.classList.remove('bad')});
 
 /* signature pad */
 const cv=$('#sig'),ctx=cv.getContext('2d');let drawing=false,signed=false,last=null;
@@ -161,10 +160,10 @@ $('#sigClear').addEventListener('click',()=>{ctx.clearRect(0,0,cv.width,cv.heigh
 /* collect + validate */
 function data(){
   const v=id=>$('#'+id).value.trim();const r=n=>(document.querySelector(`input[name="${n}"]:checked`)||{}).value;
-  const pi=r('prog');const arr=r('arr');
+  const pi=r('prog');
   return{pName:v('pName'),pIC:v('pIC'),pRel:v('pRel'),pPhone:v('pPhone'),pEmail:v('pEmail'),pAddr:v('pAddr'),p2:[v('p2Name'),v('p2Phone')].filter(Boolean).join(' · '),
     cName:v('cName'),cDob:v('cDob'),cStart:v('cStart'),age:r('age'),newst:r('newst'),sib:v('cSib'),prog:pi==null?null:+pi,hc:v('hc'),weeks:v('hcWeeks'),
-    arr:arr==='other'?v('arrOther'):arr,reason:v('reason'),sDate:v('sDate')};
+    arr2:$('#arr2').checked,arrOther:v('arrOther'),arr:[$('#arr2').checked?'2 payments per term':'',v('arrOther')].filter(Boolean).join(' · '),reason:v('reason'),sDate:v('sDate')};
 }
 function check(d){
   const miss=[];const mark=(id,ok,label)=>{if(!ok){miss.push(label);const el=$(id);if(el)el.classList.add('bad')}};
@@ -183,7 +182,7 @@ function docHTML(d){
   <h2>A. Parent / Guardian</h2><table>${row('Full name (as per IC)',d.pName)}${row('IC / passport no.',d.pIC)}${row('Relationship to child',d.pRel)}${row('Mobile no.',d.pPhone)}${row('Email',d.pEmail)}${row('Home address',d.pAddr)}${row('Second parent name &amp; mobile',d.p2)}</table>
   <h2>B. Child</h2><table>${row('Child’s full name',d.cName)}${row('Date of birth',fmtD(d.cDob))}<tr><td>Age group in ${FORM.year}</td><td>${FORM.ages.map(a=>bx(d.age===a,esc(a))).join('')}</td></tr>${row('Start date',fmtD(d.cStart))}<tr><td>New or existing student</td><td>${bx(d.newst==='New','New')}${bx(d.newst==='Existing','Existing')}</td></tr>${row('Siblings at TJC',d.sib)}</table>
   <h2>C. Programme</h2><table>${FORM.programs.map(([n,dep],i)=>`<tr><td style="width:60%">${bx(d.prog===i,esc(n))}</td><td>Initial payment ${rm(dep)}</td></tr>`).join('')}<tr><td>Holiday care</td><td>${bx(d.hc==='none','None')}${bx(d.hc==='annual','Annual')}${bx(d.hc==='weekly','Weekly')}${d.hc==='weekly'&&d.weeks?' · '+esc(d.weeks)+' week(s)':''}</td></tr></table>
-  <h2>D. Instalment Request</h2><table>${row('Preferred arrangement',d.arr)}${row('Reason for request',d.reason)}</table>
+  <h2>D. Instalment Request <span style="font-weight:normal;color:#555;font-size:9pt">(curriculum fees only)</span></h2><table><tr><td style="width:36%">Preferred arrangement</td><td>${bx(d.arr2,'2 payments per term')}</td></tr><tr><td>Other arrangement</td><td class="v" style="height:${d.arrOther?'auto':'48px'}">${esc(d.arrOther)}</td></tr>${row('Reason for request',d.reason)}</table>
   <h2>E. Declaration</h2><p style="font-size:9.5pt;margin:0">${esc($('#declText').textContent)}</p>
   <div class="sig"><div>${sig?`<img src="${sig}" alt="" style="height:70px;max-width:100%">`:'<div style="height:70px"></div>'}<div class="line">Parent / guardian: ${esc(d.pName)}<br>Date: ${fmtD(d.sDate)}</div></div><div><div style="height:70px"></div><div class="line">Received by (Admin)<br>Date:</div></div></div>
   <div class="office"><div class="oh">FOR OFFICE USE ONLY</div><table><tr><td style="width:36%">Date received</td><td style="height:26px"></td></tr><tr><td>Fee breakdown prepared by / date</td><td style="height:26px"></td></tr><tr><td>Instalment plan</td><td>No. of instalments: ____ &nbsp; Start: ________ &nbsp; End: ________</td></tr><tr><td style="vertical-align:top">Principal’s decision</td><td><div style="margin:2px 0 8px">${bx(false,'Approved')}${bx(false,'Approved with changes')}${bx(false,'Not approved')}</div><div class="tag">Remarks / conditions:</div><div style="height:60px"></div><div style="display:flex;gap:24px"><div style="flex:1;border-top:1px solid #333;padding-top:3px" class="tag">Principal’s signature</div><div style="flex:1;border-top:1px solid #333;padding-top:3px" class="tag">Date</div></div></td></tr></table></div>
